@@ -87,7 +87,7 @@
 
         <!-- BẢNG 2 TĨNH -->
         <div class="bg-white mt-12 mb-8 p-6 rounded-lg border border-indigo-300 shadow-md">
-            <h2 class="text-2xl font-bold text-indigo-700 mb-6">KPI DOANH THU MỤC TIÊU- TĂNG TRƯỞNG DOANH THU TRONG KỲ</h2>
+            <h2 class="text-2xl font-bold text-indigo-700 mb-6">KPI TRÁCH NHIỆM HOÀN THÀNH CÔNG VIỆC GIAO TRONG KỲ ( 40%)</h2>
             <div class="table-container rounded-lg border border-gray-200 mb-6">
                 <table id="kpiTable2" class="min-w-full">
                     <thead>
@@ -114,8 +114,22 @@
                             <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
                             <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
                         </tr>
-                       
-                           <td> B.1 Tỉ lệ tổng doanh thu khách hàng do  tham gia lập đơn kỳ này so với ký trước  </td>
+                        <tr>
+                           <td> B.1 Tỉ lệ số khách hàng lập đơn hàng kỳ này so với kỳ trước được giao thành công </td>
+                            <td>Đạt từ - 10% đến 10% </td>
+                            <td class="kpi2-score"> 10%</td>
+                            <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
+                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
+                        </tr>
+                       <tr>
+                           <td> B.2 Tỉ lệ số khách hàng lập đơn hàng kỳ này so với kỳ trước được giao thành công </td>
+                            <td> Trên 10% </td>
+                            <td style="color:red; font-weight:bold;"class="kpi2-score"> 20%</td>
+                            <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
+                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
+                        </tr>
+						<tr>
+                           <td> C.1 Tỉ lệ tổng doanh thu khách hàng do mình lập đơn kỳ này so với ký trước  </td>
                              <td>Đạt dưới 9%</td>
                             <td class="kpi2-score"> 10% </td>
                             <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
@@ -124,7 +138,7 @@
                    <tr>
                            <td> C.2 Tỉ lệ tổng doanh thu khách hàng do mình lập đơn kỳ này so với ký trước  </td>
                              <td>Đạt trên 10%</td>
-                            <td class="kpi2-score"> 20% </td>
+                            <td  style="color:red; font-weight:bold;"class="kpi2-score"> 40% </td>
                             <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
                             <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
                         </tr>
@@ -139,49 +153,7 @@
             </div>
         </div>
         <!-- END BẢNG 2 -->
-
-        <!-- BẢNG 3 TĨNH -->
-        <div class="bg-white mt-12 mb-8 p-6 rounded-lg border border-green-300 shadow-md">
-            <h2 class="text-2xl font-bold text-green-700 mb-6">KPI PHÁT TRIỂN KHÁCH HÀNG MỚI THÀNH CÔNG.</h2>
-            <div class="table-container rounded-lg border border-gray-200 mb-6">
-                <table id="kpiTable3" class="min-w-full">
-                    <thead>
-                        <tr>
-                            <th>Chỉ số KPI</th>
-                            <th>Đạt chỉ số</th>
-                            <th>Điểm KPI %</th>
-                            <th>Đánh giá điểm</th>
-                            <th>Báo cáo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-						<tr>
-                            <td>A.1 Tổng khách hàng mới chốt hợp tác trong kỳ tháng</td>
-                            <td> Đạt tối thiểu từ 1  KH </td>
-                            <td class="kpi2-score"> 10% </td>
-                         <td><input class="kpi3-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
-
-                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
-                        </tr>					
-						<tr>
-                            <td>A.2 Tổng khách hàng mới chốt hợp tác trong kỳ </td>
-                            <td> Đạt tối thiểu từ 3 KH </td>
-                            <td style="color:red;font-weight:bold;"class="kpi2-score"> 20% </td>
-                            <td><input class="kpi3-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
-
-                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
-                        </tr>
-						
-                    </tbody>
-                </table>
-            </div>
-            <!-- Editor BẢNG 3 -->
-            <div class="kpi3-note-section mt-4">
-                <label class="block font-semibold text-gray-700 mb-2">Phân tích báo cáo cuối kỳ:</label>
-                <div id="kpi3NoteEditor" class="quill-editor"></div>
-            </div>
-        </div>
-        <!-- END BẢNG 3 -->
+      
         
         <!-- BẢNG 4 TĨNH -->
         <div class="bg-white mt-12 mb-8 p-6 rounded-lg border border-blue-300 shadow-md">
@@ -203,28 +175,33 @@
 						 <tr>
                             <td><b style="color:green;"> A.1 Hoàn thành đóng góp hàng trong tháng</b></td>
                             <td>Hoàn thành đóng góp đúng thủ tục- quy trình trên 15 đơn hàng/ tháng</td>
-                            <td class="kpi4-score">10%</td>
+                            <td class="kpi4-score">20%</td>
                             <td><input class="kpi4-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
                             <td><textarea class="kpi4-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
                         </tr
 						<tr>
                             <td><b style="color:green;"> A.2 Hoàn thành đóng hàng - điều phối giao thành công</b></td>
-                            <td>Hoàn thành đóng - giao hàng đúng thủ tục - quy trình trên > 35 đơn/tháng </td>
-                            <td style="color:red;font-weight:bold; "class="kpi4-score"> 25%</td>
+                            <td>Hoàn thành đóng - giao hàng đúng thủ tục - quy trình trên  40 đơn/tháng </td>
+                            <td style="color:red;font-weight:bold; "class="kpi4-score"> 35%</td>
                             <td><input class="kpi4-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
                             <td><textarea class="kpi4-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
                         </tr>
 							<tr>
-		                            <td><b style="color:green;"> A.3 Hoàn thành điều phối và khai báo thu tục liên quan nhiệm vụ quản lý kho trong kỷ</b></td>	
-		                            <td>Báo cáo ứng dụng rỏ ràng- dữ liệu khai báo đúng- lưu trữ  </td>			
-		                            <td style="color:red;font-weight:bold; "class="kpi4-score"> 20%</td>			
+		                            <td><b style="color:green;"> A.3 Phát triển thành công  khách hàng mới </b></td>	
+		                            <td>Từ 1 khách hàng mới - chốt có đơn trong kỳ</td>			
+		                            <td class="kpi4-score"> 20%</td>			
 		                            <td><input class="kpi4-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>			
 		                            <td><textarea class="kpi4-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>				
 		                        </tr>				
-									
-							         
-
-
+									<tr>
+		                            <td><b style="color:green;"> A.4 Phát triển thành công  khách hàng mới </b></td>	
+		                            <td>Từ 4 khách hàng mới - chốt có đơn trong kỳ</td>			
+		                            <td style="color:red;font-weight:bold; "class="kpi4-score"> 40%</td>			
+		                            <td><input class="kpi4-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>			
+		                            <td><textarea class="kpi4-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>				
+		                        </tr>	
+							
+								
 								</tbody>
           
 
@@ -311,10 +288,11 @@
     <div id="kpiListModal" class="modal">
         <div class="modal-content">
             <span class="float-right text-xl cursor-pointer" id="closeModalBtn">&times;</span>
-            <h2 class="text-2xl font-semibold mb-6 text-gray-800">KPI ĐIỀU PHỐI KHO- TRỢ Ý KINH DOANH </h2>
+            <h2 class="text-2xl font-semibold mb-6 text-gray-800">Danh sách Bảng KPI đã lưu</h2>
             <button id="addNewKpiFromModalBtn" class="action-button mb-6 w-full">Thêm mới Bảng KPI</button>
-           <a href="https://erp-ideco.skyit.vn/#/app/dashboard/main" target="_blank" class="action-button secondary-button mb-4 w-full text-center block">ERP HOME</a>
+             <a href="https://erp-ideco.skyit.vn/#/app/dashboard/main" target="_blank" class="action-button secondary-button mb-4 w-full text-center block">ERP HOME</a>
             <div id="savedKpiList" class="space-y-3 max-h-96 overflow-y-auto"></div>
+			
         </div>
     </div>
 
