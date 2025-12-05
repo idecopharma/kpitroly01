@@ -52,7 +52,7 @@
 
     <!-- FORM KPI -->
     <div class="container mx-auto bg-white p-6 md:p-8 rounded-lg shadow-xl" id="mainKpiForm" style="display: none;">
-        <h1 class="text-3xl font-bold text-center mb-8 text-indigo-700">BẢNG KPI KINH DOANH - BÁO CÁO CÔNG VIỆC VÀ CHỈ SỐ KPI CUỐI KỲ THÁNG</h1>
+        <h1 class="text-3xl font-bold text-center mb-8 text-indigo-700">BẢNG KPI PHỤ TRÁCH KHO </h1>
         <div class="framed-info p-6 mb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
                 <label for="creatorName" class="block text-sm font-medium text-gray-700 mb-1">Tên người lập:</label>
@@ -67,7 +67,7 @@
                 <input type="date" id="creationDate" class="mt-1 block w-full rounded-md shadow-sm">
             </div>
         </div>
-        <h2 class="text-2xl font-semibold mb-4 text-gray-800">KPI HOÀN THÀNH TRÁCH NHIỆM GIAO TRONG KỲ THEO ĐỊNH HƯỚNG ( 30%) </h2>
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800"> KPI -NGHIỆP VỤ CHUYÊN MÔN HOÀN THÀNH TRONG THÁNG( 40%)  </h2>
         <div class="table-container mb-8 rounded-lg border border-gray-200">
             <table id="kpiTable" class="min-w-full">
                 <thead>
@@ -101,54 +101,35 @@
                     </thead>
                     <tbody>
                        <tr>
-                            <td> <b style="color: red;">A.1 Doanh thu thuốc tổng toàn công ty tối thiểu 1,380,000đồng.</b></td>
+                            <td> <b style="color: red;">A.1 Doanh thu thuốc tổng toàn công ty tối thiểu 1,600,000đồng</b></td>
                             <td>Đạt từ 100%</td>
                             <td style="color:red; font-weight:bold;"class="kpi2-score">10% </td>
                             <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
                             <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
                         </tr>
+                       
                         <tr>
-                            <td> <b style="color: red;">A.2 Doanh thu nhóm không phải thuốc tối thiểu 360 triệu đồng.</b></td>
-                            <td>Đạt từ 100%</td>
-                            <td style="color:red; font-weight:bold;"class="kpi2-score">10%</td>
-                            <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
-                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
-                        </tr>
-                        <tr>
-                           <td> B.1 Tỉ lệ tổng doanh thu do bạn lập đơn kỳ này so với kỳ tháng trước không gồm chuỗi nhà thuốc phụ trách.</td>
-                            <td>Đạt từ - 10% đến 10% </td>
-                            <td class="kpi2-score"> 10%</td>
+                           <td> B.1 Hoàn thành đóng hàng -khai báo đóng hàng trong ứng dụng : báo cáo dữ liệu đúng cuối kỳ</td>
+                            <td>Đạt từ 20 đơn - hoàn thành giao trong kỳ </td>
+                            <td class="kpi2-score"> 10 %</td>
                             <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
                             <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
                         </tr>
                        <tr>
-                           <td> B.2 Tỉ lệ tổng doanh thu do bạn lập đơn kỳ này so với kỳ tháng trước không gồm chuỗi nhà thuốc phụ trách.</td>
-                                                      <td>Đạt từ 11% đến 20%</td>
-                            <td class="kpi2-score"> 20% </td>
+                            <td> B.2 Hoàn thành đóng hàng - khai báo đóng hàng trong ứng dụng : báo cáo dữ liệu đúng cuối kỳ</td>
+                            <td>Đạt trên 30 đơn hàng</td>
+                            <td style="color:red; font-weight:bold;"class="kpi2-score"> 30% </td>
                             <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
                             <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
                         </tr>
 						
-						<tr>
-                           <td> B.3 Tỉ lệ tổng doanh thu do bạn lập đơn kỳ này so với kỳ tháng trước không gồm chuỗi nhà thuốc phụ trách.</td>
-                                                        <td>Đạt từ 26% đến 40%</td>
-                            <td style="color:red;font-weight:bold;"class="kpi2-score"> 30% </td>
-                            <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
-                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
-                        </tr>
-						 <td> B.4 Tỉ lệ tổng doanh thu do bạn lập đơn kỳ này so với kỳ tháng trước không gồm chuỗi nhà thuốc phụ trách.</td>
-                                                        <td> Trên 40%</td>
-                            <td style="color:red;font-weight:bold;"class="kpi2-score"> 35% </td>
-                            <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
-                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
-                        </tr>
-						
-				   </tbody>
+												
+                    </tbody>
                 </table>
             </div>
             <!-- Editor BẢNG 2 -->
             <div class="kpi2-note-section mt-4">
-                <label class="block font-semibold text-gray-700 mb-2">Phân tích báo cáo cuối kỳ.</label>
+                <label class="block font-semibold text-gray-700 mb-2">Phân tích báo cáo cuối kỳ</label>
                 <div id="kpi2NoteEditor" class="quill-editor"></div>
             </div>
         </div>
@@ -156,7 +137,7 @@
 
         <!-- BẢNG 3 TĨNH -->
         <div class="bg-white mt-12 mb-8 p-6 rounded-lg border border-green-300 shadow-md">
-            <h2 class="text-2xl font-bold text-green-700 mb-6">KPI XÚC TIẾN KHÁCH HÀNG THÀNH CÔNG CÓ ĐƠN ( GỒM KHÁCH HÀNG GIAO + KHÁCH HÀNG MỚI /KỲ)</h2>
+            <h2 class="text-2xl font-bold text-green-700 mb-6">KPI ĐIỀU PHỐI KHO- QUẢN LÝ DỮ LIỆU SOP </h2>
             <div class="table-container rounded-lg border border-gray-200 mb-6">
                 <table id="kpiTable3" class="min-w-full">
                     <thead>
@@ -170,32 +151,31 @@
                     </thead>
                     <tbody>
 						<tr>
-                           <td> C.1 Số khách hàng do nhân viên lập - hoàn thành chốt đơn trong kỳ thành công . </td>
-                             <td>Đạt tới 10 khách hàng/kỳ</td>
+                            <td>A.1 Hoàn thành quản lý khai báo dữ liệu kho trên ứng dụng với số liệu kho ERP-Thực tế </td>
+                            <td> Hoàn thành đồng bộ dữ liệu khai báo đúng - tỉnh lệ sai sót không quá +/- 10% chênh lệch khi báo cáo - kiểm tra </td>
                             <td class="kpi2-score"> 10% </td>
-                            <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
+                         <td><input class="kpi3-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
+
+                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
+                        </tr>					
+						<tr>
+                            <td>A.2 Hoàn thành quản lý khai báo dữ liệu kho trên ứng dụng với số liệu kho ERP-Thực tế  </td>
+                            <td> Hoàn thành đồng bộ dữ liệu khai báo đúng - tỉnh lệ sai sót không quá +/- 5% chênh lệch khi báo cáo - kiểm tra</td>
+                            <td class="kpi2-score"> 20% </td>
+                            <td><input class="kpi3-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
+
                             <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
                         </tr>
-                   
-<tr>
-                        <td> C.2 Số khách hàng do nhân viên lập - hoàn thành chốt đơn trong kỳ thành công .</td>
-                             <td>Đạt từ 11 - 19 khách hàng/ kỳ</td>
-                            <td  class="kpi2-score"> 25% </td>
-                            <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
+						
+						<tr>
+                            <td>A.Hoàn thành quản lý khai báo dữ liệu kho trên ứng dụng với số liệu kho ERP-Thực tế   </td>
+                            <td> Hoàn thành đồng bộ dữ liệu khai báo đúng - khớp số liệu kiểm tra 100%) </td>
+                            <td class="kpi2-score"> 30% </td>
+                            <td><input class="kpi3-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
+
                             <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
                         </tr>
-						<td> C.3 Số khách hàng do nhân viên lập - hoàn thành chốt đơn trong kỳ thành công </td>
-                             <td>Đạt từ 20 - 30 khách hàng/kỳ</td>
-                            <td class="kpi2-score"> 35% </td>
-                            <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
-                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
-                        </tr>
-						<td> C.4 Số khách hàng do nhân viên lập - hoàn thành chốt đơn trong kỳ thành công </td>
-                             <td>Đạt trên 30 khách hàng/kỳ</td>
-                            <td style="color:red;font-weight:bold;"class="kpi2-score"> 35% + 1.5%KPI/ 1 khách hàng phát sinh tăng </td>
-                            <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
-                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
-                        </tr>
+						
                     </tbody>
                 </table>
             </div>
@@ -207,110 +187,25 @@
         </div>
         <!-- END BẢNG 3 -->
         
-        <!-- BẢNG 4 TĨNH -->
-        <div class="bg-white mt-12 mb-8 p-6 rounded-lg border border-blue-300 shadow-md">
-            <h2 class="text-2xl font-bold text-blue-700 mb-6">KPI GHI NHẬN NỖ LỰC VƯỢT TRỘI CHO NHÓM DƯỢC MỸ PHẨM UVS  </h2>
-            <div class="table-container rounded-lg border border-gray-200 mb-6">
-                <table id="kpiTable4" class="min-w-full">
-                    <thead>
-                        <tr>
-                            <th>Chỉ số KPI</th>
-                            <th>Đạt chỉ số</th>
-                            <th>Điểm KPI %</th>
-                            <th>Đánh giá điểm</th>
-                            <th>Báo cáo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                    						
-						 <tr>
-                            <td><b style="color:green;"> A.1 Khách hàng đặt hàng nhóm không phải thuốc</b></td>
-                            <td>Từ 1 đến 4 khách hàng</td>
-                            <td class="kpi4-score">10%</td>
-                            <td><input class="kpi4-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
-                            <td><textarea class="kpi4-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
-                        </tr
-						<tr>
-                            <td><b style="color:green;"> A.2 Khách hàng đặt hàng nhóm không phải thuốc.</b></td>
-                            <td>Từ 5 khách hàng </td>
-                            <td style="color:red;font-weight:bold; "class="kpi4-score"> 20%</td>
-                            <td><input class="kpi4-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
-                            <td><textarea class="kpi4-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
-                        </tr>
-											
-									
-						
-						
-						
-						
-						
-						
-						
-						
-                    </tbody>
-                </table>
-            </div>
-            <div class="kpi4-note-section mt-4">
-                <label class="block font-semibold text-gray-700 mb-2">Phân tích báo cáo cuối kỳ:</label>
-                <div id="kpi4NoteEditor" class="quill-editor"></div>
-            </div>
-			<!-- Quy định/nhận xét cuối bảng tĩnh KPI 3 -->
-
-        </div>
 		<div class="mt-4 p-4 border border-dashed border-green-500 bg-green-50 rounded-xl shadow-sm">
-  <div class="font-semibold mb-2 text-green-700">QUY ĐỊNH THƯỞNG KPI - TÍNH THƯỞNG HOA HỒNG </div>
+  <div class="font-semibold mb-2 text-green-700">QUY ĐỊNH THƯỞNG KPI </div>
   <div class="text-gray-700 leading-relaxed">
-  <p><b>ĐIỂM KPI TĂNG SẼ TĂNG THU NHẬP TÍNH ĐIỂM KPI - KPI CÓ THỂ HƠN 100% ĐIỂM CHUẨN</b></p><br>
-  
-    <p><b>1.</b> Thành công 1 Nhà thuốc cho thuốc có tổng giá trị đặt hàng tối thiểu <b>3 triệu đồng</b> - thưởng <b>200,000 đồng</b>.</p>
-<p><b>2.</b> Thành công 1 Nhà thuốc cho nhóm không thuốc có tổng giá trị đặt hàng từ <b>3 triệu đồng</b> - thưởng <b>500,000 đồng</b>.</p>
-<p><b>3.</b> Thành công 1 NPP cho nhóm không thuốc có tổng giá trị đặt hàng từ <b> 8 triệu đồng/đơn</b> - thưởng <b>1 triệu đồng</b>.</p>
-<p><b>4.</b> Mở  chuỗi Nhà Thuốc mới có lên đơn tối thiểu <b> 5 triệu đồng</b> thưởng <b>800,000 đồng</b>.</p>
-<p><b>5.</b> Mở thành công NT trong phòng khám - có đặt hàng có giá trị tối thiểu <b> 6 triệu đồng</b> - thưởng <b>800,000 đồng</b>.</p>
+  <p><b>THƯỞNG XEM XÉT CỘNG ĐIỂM KPI TRONG KỲ THÁNG HAY QUÝ ÁP DỤNG CHO KHO VẬN
+    <p><b>1.</b> Nếu giao nhận- thu tiền hoàn thành cho các đơn khu vực thành phố HCM từ 35 khách hàng trở lên  <b> Mỗi khách hàng tăng thêm được cộng 2% KPI thưởng</b>.</p>
+    <p><b>1.</b> Nếu hoàn thành đóng gói cho từng dơn hàng có số đơn hàng đóng gói do cá nhân phụ trách thành công trên 30 đơn hàng trở lên -chạy từng ứng dụng để báo cáo  <b> Mỗi đơn từ đơn 31 sẽ được được cộng 2 % KPI thưởng</b>.</p>
+    <p><b>1.</b> Nếu số liệu kiểm kho trong quý - báo cáo dữ liệu - in dữ liệu đầy đủ khoa học -báo cáo đầy đủ ( xác nhận cấp quản lý ) : Thưởng cả team kho vận 30%/mỗi nhân sự/quý - được cộng đầu tháng tới quý tiếp  </b>.</p>
 
-<u>
-  <li>a. Cho phép cộng dồn 2 đơn hàng trong thời gian tối đa <b>20 ngày</b> để có tổng giá trị đơn đạt mức thưởng trên và trả tại thời điểm đơn cuối.</li>
-  <li>b. Công ty tính thưởng trên báo cáo cuối kỳ của nhân viên đúng theo quy định và có xác nhận từ bộ phận kế toán - cấp quản lý kinh doanh.</li>
-  <li>c. Đối với 1 Nhà thuốc có cùng tư cách pháp nhân khi mở chi nhanh mới thì chi nhánh mới không được tính là mở 1 nhà thuốc mới vì đă dược tính vào doanh thu đặt hàng chung rồi</li>
-  <li>d. GHI CHÚ: DOANH THU TÍNH TỈ LỆ TĂNG TRƯỞNG Ở MỤC KPI : LÀ DOANH THU GỘP ( GỒM CẢ CÔNG NỢ) </li>
-  <li>d. GHI CHÚ: NHÂN VIÊN KINH DOANH PHẢI BÁO CÁO CÁC CHỈ SỐ KPI TRÊN TRONG BÁO CÁO CUỐI THÁNG MỚI NHẬN THƯỞNG KPI KHI XEM XÉT ĐÁNH GIÁ </li>
-  
-  
-</u>
+	  <p><b>KHOẢN BỊ TRỨ ĐIỂM KPI CẦN XEM XÉT</b></p><br>
+	   
+<p><b>1.</b> Lỗi phát hiện không lập phiếu xuất - nhập kho - biên bản nhận hàng - lưu in đúng  <b> Trừ 15% điểm KPI/phiếu/người phụ trách</b>.</p>
+<p><b>2.</b> Lỗi phát hiện tồn kho cuối kỳ trên ERP - ỨNG DỤNG QUÀN LÝ KHO sai  lệch lớn trên +/- 10% số lượng/1 loại <b> Trừ 15% điểm KPI/ mọi nhân sự kho giao nhận</b>.</p>
+<p><b>3.</b> Lỗi không gởi báo cáo đúng hạn cuối kỳ - không lập biên bản khi kiểm kho có xác nhận đầy đủ  <b> Trừ 10 điểm KPI/ kế toán - kho vận team</b>.</p>
 
-<p><b>HOA HỒNG  ĐƯỢC TÍNH CHO KHÁCH HÀNG DO NHÂN VIÊN KHAI THÁC TRỰC TIẾP VÀ TÍNH LŨY KÊ DOANH THU TẠI THỜI ĐIỂM TRONG KỲ THÁNG</b></p><br>
+<p><b>4.</b> Lỗi xuất hàng giao thuốc nhầm lẫn Lô - hạn dụng gây phải đổi trà- điều chỉnh hóa đơn  <b> Trứ 15% điểm KPI/ lần sai/phụ trách kho và giao nhận </b>.</p>
+<p><b>5.</b> Lỗi phát hiện không tuân thủ quy trình -quy định SOP liên quan kho  <b> Trừ 15% điểm KPI/lỗi/người phụ trách và trừ cấp quản lý 20% KPI </b>.</p>
 
-<p><b>a. Doanh Thu nhóm không phải thuốc:</b><br>
-- Doanh thu theo đơn hàng từ <b>3.5triệu đồng</b> - hoa hồng <b>2.5%</b><br>
-- Doanh thu theo đơn hàng từ <b>16 triệu đồng</b> - hoa hồng <b>3.5%</b><br>
-- Doanh thu theo đơn hàng từ <b>30 triệu đồng</b> - hoa hồng <b>4.5%</b>
-- Doanh thu theo đơn hàng từ <b>60 triệu đồng</b> - hoa hồng <b>6.5</b>
-</p>
-
-<p><b>b. Doanh thu nhóm thuốc:</b><br>
-- Doanh thu theo đơn hàng từ <b>2.5 triệu đồng</b> - hoa hồng <b>1.5%</b><br>
-- Doanh thu theo đơn hàng từ <b>30 triệu đồng</b> - hoa hồng <b>2%</b><br>
-- Doanh thu theo đơn hàng từ <b>60 triệu đồng</b> - hoa hồng <b>3.5%</b>
-</p>
-
-
-<p><u>Ghi chú:</u> doanh thu tính trên người lập đơn trên ERP và báo cáo cuối tháng để làm căn cứ tính.</p><br>
-
-
- <p><b>1.</b> Lỗi nhắc nhở sai sót khai báo giao dịch khách hàng không đúng quá 3 lần/tháng <b> Trừ 8% điểm KPI</b>.</p>
-	   <P><b>2.</b> Không báo cáo nhanh cuối tuần theo quy định mỗi báo cáo cuối tuần không viết- nộp  <b> Trừ 8% điêm KPI</b></p>
-<p><b>3.</b> Lỗi báo cáo Cuối Tháng theo quy định trễ hay bị buột phải làm lại do sai sót nhiều <b> Trừ 6 điểm KPI</b>.</p>
-<p><b>4.</b> Lỗi sai sót đơn hàng- khai báo đơn hàng quá 3 lần/ tháng <b> Trứ 6 điểm KPI </b>.</p>
-<p><b>5.</b> Lỗi không tuân thủ quy định lập kế hoạch định kỳ 4 tuần có 4 bảng kế hoạch  <b> Trừ 8 điểm KPI </b>.</p>
-<p><b>6.</b> Lỗi sai khác không đúng quy định công ty đề ra hay ban hành trước đó <b> Trứ điểm 8 điểm KPI/1 lần nhắc</b>.</p>
-
-	
-	
   </div>
 </div>
-
-        <!-- END BẢNG 4 -->
 
         <!-- Tổng điểm KPI -->
         <div class="container mx-auto bg-white mb-12 p-6 rounded-lg shadow flex justify-end">
@@ -333,15 +228,14 @@
     <div id="kpiListModal" class="modal">
         <div class="modal-content">
             <span class="float-right text-xl cursor-pointer" id="closeModalBtn">&times;</span>
-            <h2 class="text-2xl font-semibold mb-6 text-gray-800">BẢNG KPI QUẢN LÝ KINH DOANH </h2>
+            <h2 class="text-2xl font-semibold mb-6 text-gray-800">KPI QUẢN LÝ ĐIÊU PHỐI KV- MR TUẤN</h2>
             <button id="addNewKpiFromModalBtn" class="action-button mb-6 w-full">Thêm mới Bảng KPI</button>
-           <a href="https://erp-ideco.skyit.vn/#/app/dashboard/main" target="_blank" class="action-button secondary-button mb-4 w-full text-center block">ERP HOME</a>
+             <a href="https://erp-ideco.skyit.vn/#/app/dashboard/main" target="_blank" class="action-button secondary-button mb-4 w-full text-center block">ERP HOME</a>
             <div id="savedKpiList" class="space-y-3 max-h-96 overflow-y-auto"></div>
         </div>
     </div>
 
 <script>
-// --- Firebase config ---
 const firebaseConfig = {
   apiKey: "AIzaSyCC2KUiYoGrEWl3GUCk2xUoUU_TQTX-0rw",
   authDomain: "kpi-7d405.firebaseapp.com",
@@ -352,6 +246,8 @@ const firebaseConfig = {
   appId: "1:408635637678:web:435407046d80ddc42cd23f",
   measurementId: "G-Y9KH6RT5V0"
 };
+
+
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
@@ -378,7 +274,7 @@ const quillToolbar = [
   ['clean']
 ];
 
-let kpi2NoteEditor, kpi3NoteEditor, kpi4NoteEditor;
+let kpi2NoteEditor, kpi3NoteEditor;
 
 // Khởi tạo editor sau khi DOM loaded
 function initEditors() {
@@ -390,15 +286,10 @@ function initEditors() {
       modules: { toolbar: quillToolbar },
       theme: 'snow'
     });
-    kpi4NoteEditor = new Quill('#kpi4NoteEditor', {
-      modules: { toolbar: quillToolbar },
-      theme: 'snow'
-    });
 }
 function resetEditors() {
     kpi2NoteEditor.root.innerHTML = '';
     kpi3NoteEditor.root.innerHTML = '';
-    kpi4NoteEditor.root.innerHTML = '';
 }
 
 function generateId() {
@@ -451,17 +342,15 @@ function saveKpiData() {
     // Lưu nội dung Quill editor
     const kpi2Note = kpi2NoteEditor.root.innerHTML;
     const kpi3Note = kpi3NoteEditor.root.innerHTML;
-    const kpi4Note = kpi4NoteEditor.root.innerHTML;
 
     // Lưu giá trị đánh giá từ các bảng tĩnh
     const kpi2Evaluations = Array.from(document.querySelectorAll('#kpiTable2 .kpi2-evaluation')).map(el => el.value);
     const kpi3Evaluations = Array.from(document.querySelectorAll('#kpiTable3 .kpi3-evaluation')).map(el => el.value);
-    const kpi4Evaluations = Array.from(document.querySelectorAll('#kpiTable4 .kpi4-evaluation')).map(el => el.value);
 
     let kpiData = {
         creatorName, department, creationDate, kpiRows: kpiRowsData,
-        kpi2Note, kpi3Note, kpi4Note,
-        kpi2Evaluations, kpi3Evaluations, kpi4Evaluations, // Thêm dữ liệu đánh giá từ các bảng tĩnh
+        kpi2Note, kpi3Note,
+        kpi2Evaluations, kpi3Evaluations, // Thêm dữ liệu đánh giá từ các bảng tĩnh
         year: new Date().getFullYear(), id: currentKpiId || generateId()
     };
     db.ref('kpiBoards_v2/'+kpiData.id).set(kpiData, err=>{
@@ -537,16 +426,9 @@ function loadKpiToForm(kpiId) {
                 });
             }
             
-            if (kpi.kpi4Evaluations) {
-                document.querySelectorAll('#kpiTable4 .kpi4-evaluation').forEach((el, index) => {
-                    if (kpi.kpi4Evaluations[index]) el.value = kpi.kpi4Evaluations[index];
-                });
-            }
-            
             // Đọc nội dung note editor
             kpi2NoteEditor.root.innerHTML = kpi.kpi2Note || '';
             kpi3NoteEditor.root.innerHTML = kpi.kpi3Note || '';
-            kpi4NoteEditor.root.innerHTML = kpi.kpi4Note || '';
             showForm(); closeModal();
             calcTotalEvaluationScore();
         }
@@ -608,9 +490,7 @@ document.getElementById('exportPdfBtn').onclick = function () {
     });
 };
 
-
-
-// --- TÍNH TỔNG "Đánh giá điểm" cả 4 bảng ---
+// --- TÍNH TỔNG "Đánh giá điểm" cả 3 bảng ---
 function calcTotalEvaluationScore() {
     let sum = 0;
     // Bảng 1 (động)
@@ -625,11 +505,6 @@ function calcTotalEvaluationScore() {
     });
     // Bảng 3 (tĩnh)
     document.querySelectorAll('#kpiTable3 .kpi3-evaluation').forEach(input => {
-        let v = parseFloat(input.value);
-        if (!isNaN(v)) sum += v;
-    });
-    // Bảng 4 (tĩnh) - THÊM MỚI!
-    document.querySelectorAll('#kpiTable4 .kpi4-evaluation').forEach(input => {
         let v = parseFloat(input.value);
         if (!isNaN(v)) sum += v;
     });
@@ -648,10 +523,6 @@ function addEvaluationInputEvents() {
     });
     // Bảng 3
     document.querySelectorAll('#kpiTable3 .kpi3-evaluation').forEach(input => {
-        input.addEventListener('input', calcTotalEvaluationScore);
-    });
-    // Bảng 4
-    document.querySelectorAll('#kpiTable4 .kpi4-evaluation').forEach(input => {
         input.addEventListener('input', calcTotalEvaluationScore);
     });
 }
@@ -682,7 +553,7 @@ document.getElementById('exportHtmlBtn').onclick = function() {
         scoreEvaluation: row.querySelector('.scoreEvaluation').value,
         reportNotes: row.querySelector('.reportNotes').value,
     }));
-    // Lấy dữ liệu bảng 2, 3, 4 tĩnh
+    // Lấy dữ liệu bảng 2, 3 tĩnh
     const kpi2 = Array.from(document.querySelectorAll('#kpiTable2 tbody tr')).map(row => ({
         cells: Array.from(row.children).map(cell => {
             if(cell.querySelector('input')) return cell.querySelector('input').value;
@@ -697,17 +568,9 @@ document.getElementById('exportHtmlBtn').onclick = function() {
             return cell.innerHTML;
         })
     }));
-    const kpi4 = Array.from(document.querySelectorAll('#kpiTable4 tbody tr')).map(row => ({
-        cells: Array.from(row.children).map(cell => {
-            if(cell.querySelector('input')) return cell.querySelector('input').value;
-            if(cell.querySelector('textarea')) return cell.querySelector('textarea').value;
-            return cell.innerHTML;
-        })
-    }));
     // Ghi chú cuối kỳ
     const kpi2Note = document.querySelector('#kpi2NoteEditor .ql-editor').innerHTML;
     const kpi3Note = document.querySelector('#kpi3NoteEditor .ql-editor').innerHTML;
-    const kpi4Note = document.querySelector('#kpi4NoteEditor .ql-editor').innerHTML;
     // Tổng điểm
     const totalScore = document.getElementById('total-evaluation-score').textContent;
 
@@ -776,10 +639,6 @@ document.getElementById('exportHtmlBtn').onclick = function() {
         <h2 style="color:#15803d">KPI PHÁT TRIỂN KHÁCH HÀNG MỚI THÀNH CÔNG</h2>
         <table>${document.querySelector('#kpiTable3 thead').outerHTML}<tbody>${genTableHtml(kpi3)}</tbody></table>
         <div><b>Phân tích báo cáo cuối kỳ:</b><div class="quill-view">${kpi3Note}</div></div>
-
-        <h2 style="color:#2563eb">KPI CHỈ SỐ QUẢN LÝ - XÚC TIẾN ĐƠN HÀNG THÀNH CÔNG</h2>
-        <table>${document.querySelector('#kpiTable4 thead').outerHTML}<tbody>${genTableHtml(kpi4)}</tbody></table>
-        <div><b>Phân tích báo cáo cuối kỳ:</b><div class="quill-view">${kpi4Note}</div></div>
 
         <div class="mt-8 mb-2" style="text-align:right">
             <span style="font-weight:600">TỔNG ĐIỂM KPI: </span>
