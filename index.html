@@ -52,7 +52,7 @@
 
     <!-- FORM KPI -->
     <div class="container mx-auto bg-white p-6 md:p-8 rounded-lg shadow-xl" id="mainKpiForm" style="display: none;">
-        <h1 class="text-3xl font-bold text-center mb-8 text-indigo-700">BẢNG KPI PHỤ TRÁCH KHO </h1>
+        <h1 class="text-3xl font-bold text-center mb-8 text-indigo-700">BẢNG KPI KHO VẬN VÀ BÁO CÁO CÔNG VIỆC VÀ CHỈ SỐ KPI  CUỐI KỲ</h1>
         <div class="framed-info p-6 mb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
                 <label for="creatorName" class="block text-sm font-medium text-gray-700 mb-1">Tên người lập:</label>
@@ -67,7 +67,7 @@
                 <input type="date" id="creationDate" class="mt-1 block w-full rounded-md shadow-sm">
             </div>
         </div>
-        <h2 class="text-2xl font-semibold mb-4 text-gray-800"> KPI -NGHIỆP VỤ CHUYÊN MÔN HOÀN THÀNH TRONG THÁNG( 40%)  </h2>
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800"> KPI -NGHIỆP VỤ CHUYÊN MÔN HOÀN THÀNH TRONG THÁNG ( 20%)  </h2>
         <div class="table-container mb-8 rounded-lg border border-gray-200">
             <table id="kpiTable" class="min-w-full">
                 <thead>
@@ -87,7 +87,7 @@
 
         <!-- BẢNG 2 TĨNH -->
         <div class="bg-white mt-12 mb-8 p-6 rounded-lg border border-indigo-300 shadow-md">
-            <h2 class="text-2xl font-bold text-indigo-700 mb-6">KPI DOANH THU MỤC TIÊU- TĂNG TRƯỞNG DOANH THU TRONG KỲ</h2>
+            <h2 class="text-2xl font-bold text-indigo-700 mb-6">KPI HIỆU SUẤT CÔNG VIỆC </h2>
             <div class="table-container rounded-lg border border-gray-200 mb-6">
                 <table id="kpiTable2" class="min-w-full">
                     <thead>
@@ -101,29 +101,30 @@
                     </thead>
                     <tbody>
                        <tr>
-                            <td> <b style="color: red;">A.1 Doanh thu thuốc tổng toàn công ty tối thiểu 1,600,000đồng</b></td>
-                            <td>Đạt từ 100%</td>
-                            <td style="color:red; font-weight:bold;"class="kpi2-score">10% </td>
+                            <td> <b style="color: red;">A.1 Xử lý đơn hàng  phát sinh thực tế đúng theo yêu cầu công việc </b></td>
+                            <td>Thực hiện kiểm hàng - đóng hàng thủ tục khai báo - dữ liệu khai đầy đủ -có báo cáo kết quả cuối kỳ</td>
+                            <td style="color:red; font-weight:bold;"class="kpi2-score">20% </td>
                             <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
                             <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
                         </tr>
                        
                         <tr>
-                           <td> B.1 Hoàn thành đóng hàng -khai báo đóng hàng trong ứng dụng : báo cáo dữ liệu đúng cuối kỳ</td>
-                            <td>Đạt từ 20 đơn - hoàn thành giao trong kỳ </td>
-                            <td class="kpi2-score"> 10 %</td>
+                           <td> B.1 Tỉ lệ hoàn thành đóng hàng phát sinh trong ngày đúng yêu cầu</td>
+                            <td> Hoàn thành đóng hàng thành công trên 98% đơn hàng phát sinh trong kỳ ( có báo cáo) </td>
+                            <td class="kpi2-score"> 20 %</td>
                             <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
                             <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
                         </tr>
                        <tr>
-                            <td> B.2 Hoàn thành đóng hàng - khai báo đóng hàng trong ứng dụng : báo cáo dữ liệu đúng cuối kỳ</td>
-                            <td>Đạt trên 30 đơn hàng</td>
-                            <td style="color:red; font-weight:bold;"class="kpi2-score"> 30% </td>
+                            <td> B.2 Hoài thành công tác điều phối hàng hóa với giao nhận thành công trong kỳ</td>
+                            <td>Hoàn thành giao đúng - đủ các đơn hàng trong kỳ trên 98%/số đơn hàng phát sinh</td>
+                            <td style="color:red; font-weight:bold;"class="kpi2-score"> 10% </td>
                             <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
                             <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
                         </tr>
 						
-												
+						
+						
                     </tbody>
                 </table>
             </div>
@@ -137,7 +138,7 @@
 
         <!-- BẢNG 3 TĨNH -->
         <div class="bg-white mt-12 mb-8 p-6 rounded-lg border border-green-300 shadow-md">
-            <h2 class="text-2xl font-bold text-green-700 mb-6">KPI ĐIỀU PHỐI KHO- QUẢN LÝ DỮ LIỆU SOP </h2>
+            <h2 class="text-2xl font-bold text-green-700 mb-6">KPI CHÍNH XÁC - CHẤT LƯỢNG - QUẢN LÝ SOP  </h2>
             <div class="table-container rounded-lg border border-gray-200 mb-6">
                 <table id="kpiTable3" class="min-w-full">
                     <thead>
@@ -151,26 +152,37 @@
                     </thead>
                     <tbody>
 						<tr>
-                            <td>A.1 Hoàn thành quản lý khai báo dữ liệu kho trên ứng dụng với số liệu kho ERP-Thực tế </td>
-                            <td> Hoàn thành đồng bộ dữ liệu khai báo đúng - tỉnh lệ sai sót không quá +/- 10% chênh lệch khi báo cáo - kiểm tra </td>
+                            <td>A.1 Sai lô - hạn dùng - nhầm hàng - nhầm địa chỉ  </td>
+                            <td> Tỉ lệ sai sót 0% ( không lỗi)  </td>
                             <td class="kpi2-score"> 10% </td>
                          <td><input class="kpi3-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
 
                             <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
                         </tr>					
+						
+						
 						<tr>
-                            <td>A.2 Hoàn thành quản lý khai báo dữ liệu kho trên ứng dụng với số liệu kho ERP-Thực tế  </td>
-                            <td> Hoàn thành đồng bộ dữ liệu khai báo đúng - tỉnh lệ sai sót không quá +/- 5% chênh lệch khi báo cáo - kiểm tra</td>
-                            <td class="kpi2-score"> 20% </td>
+                            <td>A.2 Hồ sơ xuất - nhập tồn khai- khai báo ứng dụng</td>
+                            <td> Đẩy đủ > 90% có báo cáo khai báo chi tiế cuối kỳ tháng  </td>
+                            <td class="kpi2-score"> 10% </td>
                             <td><input class="kpi3-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
 
                             <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
                         </tr>
-						
+
 						<tr>
-                            <td>A.Hoàn thành quản lý khai báo dữ liệu kho trên ứng dụng với số liệu kho ERP-Thực tế   </td>
-                            <td> Hoàn thành đồng bộ dữ liệu khai báo đúng - khớp số liệu kiểm tra 100%) </td>
-                            <td class="kpi2-score"> 30% </td>
+                            <td>A.3 Công tác hỗ trợ quản lý khách hàng giao hoàn thành trong kỳ với kinh doanh</td>
+                            <td> Thực hiện theo dõi - quản lý đơn hàng giao thành công trong kỳ </td>
+                            <td class="kpi2-score"> 15% </td>
+                            <td><input class="kpi3-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
+
+                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
+                        </tr>
+
+							<tr>
+                            <td>A.4 Đánh giá hợp tác từ bộ phận kinh doanh ( công tác hỗ trợ trong kỳ) </td>
+                            <td> Hợp tác tốt - hỗ trợ tốt đáp ứng công việc hiễu quả   </td>
+                            <td class="kpi2-score"> 15% </td>
                             <td><input class="kpi3-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
 
                             <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
@@ -246,8 +258,6 @@ const firebaseConfig = {
   appId: "1:408635637678:web:435407046d80ddc42cd23f",
   measurementId: "G-Y9KH6RT5V0"
 };
-
-
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
@@ -606,7 +616,7 @@ document.getElementById('exportHtmlBtn').onclick = function() {
         ${style}
     </head><body>
     <div class="container">
-        <h1 class="text-3xl font-bold text-center mb-8" style="color:#4f46e5">BẢNG KPI KINH DOANH CHO CẤP PHỤ TRÁCH KINH VỰC</h1>
+        <h1 class="text-3xl font-bold text-center mb-8" style="color:#4f46e5">BẢNG KPI PHỤ TRÁCH KHO </h1>
         <div class="framed-info mb-8" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
             <div>
                 <label><b>Tên người lập:</b></label>
@@ -672,7 +682,6 @@ document.getElementById('exportHtmlBtn').onclick = function() {
 </script>
 </body>
 </html>
-
 
 
 
