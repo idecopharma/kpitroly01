@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BẢNG KPI - IDECO (Bản hoàn chỉnh)</title>
+    <title>BẢNG KPI PHỤ TRÁCH KHO - IDECO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <!-- QuillJS Editor -->
     <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
@@ -29,7 +28,6 @@
         .secondary-button { background: #6b7280; }
         .secondary-button:hover { background: #4b5563; }
         .framed-info { border: 2px solid #6366f1; border-radius: 14px; background: #f5f3ff; box-shadow: 0 1px 8px #d1d5db33; }
-        /* Quill resize */
         .quill-editor {
             min-height: 90px;
             resize: vertical;
@@ -40,92 +38,118 @@
             width: 100%;
             margin-bottom: 16px;
         }
-        .ql-toolbar.ql-snow {
-            border-radius: 8px 8px 0 0;
-        }
-        .ql-container.ql-snow {
-            border-radius: 0 0 8px 8px;
+        .ql-toolbar.ql-snow { border-radius: 8px 8px 0 0; }
+        .ql-container.ql-snow { border-radius: 0 0 8px 8px; }
+        .score-input { width: 80px; text-align: center; }
+        .kpi-score-display { font-weight: bold; color: #dc2626; }
+        .total-score-box { 
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
         }
     </style>
 </head>
 <body class="p-4 md:p-8">
 
-    <!-- FORM KPI -->
+    <!-- FORM KPI CHÍNH -->
     <div class="container mx-auto bg-white p-6 md:p-8 rounded-lg shadow-xl" id="mainKpiForm" style="display: none;">
-        <h1 class="text-3xl font-bold text-center mb-8 text-indigo-700">BẢNG KPI KHO VẬN VÀ BÁO CÁO CÔNG VIỆC VÀ CHỈ SỐ KPI  CUỐI KỲ</h1>
+        <h1 class="text-3xl font-bold text-center mb-8 text-indigo-700">BẢNG KPI PHỤ TRÁCH KHO VẬN - BÁO CÁO CÔNG VIỆC VÀ CHỈ SỐ KPI CUỐI KỲ</h1>
+        
+        <!-- THÔNG TIN NGƯỜI LẬP -->
         <div class="framed-info p-6 mb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
                 <label for="creatorName" class="block text-sm font-medium text-gray-700 mb-1">Tên người lập:</label>
-                <input type="text" id="creatorName" class="mt-1 block w-full rounded-md shadow-sm">
+                <input type="text" id="creatorName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
             </div>
             <div>
                 <label for="department" class="block text-sm font-medium text-gray-700 mb-1">Bộ phận:</label>
-                <input type="text" id="department" class="mt-1 block w-full rounded-md shadow-sm">
+                <input type="text" id="department" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
             </div>
             <div>
                 <label for="creationDate" class="block text-sm font-medium text-gray-700 mb-1">Ngày lập:</label>
-                <input type="date" id="creationDate" class="mt-1 block w-full rounded-md shadow-sm">
+                <input type="date" id="creationDate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
             </div>
         </div>
-        <h2 class="text-2xl font-semibold mb-4 text-gray-800"> KPI -NGHIỆP VỤ CHUYÊN MÔN HOÀN THÀNH TRONG THÁNG ( 10%)  </h2>
+
+        <!-- BẢNG 1: KPI NGHIỆP VỤ CHUYÊN MÔN (ĐỘNG) -->
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800">KPI NGHIỆP VỤ CHUYÊN MÔN HOÀN THÀNH TRONG THÁNG (10%)</h2>
         <div class="table-container mb-8 rounded-lg border border-gray-200">
-            <table id="kpiTable" class="min-w-full">
+            <table id="kpiTable1" class="min-w-full">
                 <thead>
                     <tr>
+                        <th>STT</th>
                         <th>Chỉ số KPI</th>
                         <th>Đạt chỉ số</th>
                         <th>Điểm KPI %</th>
                         <th>Đánh giá điểm</th>
                         <th>Báo cáo</th>
-                        <th>Xóa</th>
+                        <th>Hành động</th>
                     </tr>
                 </thead>
-                <tbody id="kpiTableBody"></tbody>
+                <tbody id="kpiTable1Body"></tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right font-bold">Tổng điểm bảng 1:</td>
+                        <td id="table1TotalScore" class="kpi-score-display">0%</td>
+                        <td id="table1TotalEvaluation" class="kpi-score-display">0</td>
+                        <td colspan="2"></td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
-        <button id="addRowBtn" class="action-button mb-8">Thêm hàng KPI</button>
+        <button id="addRowBtn" class="action-button mb-8">Thêm chỉ số KPI</button>
 
-        <!-- BẢNG 2 TĨNH -->
+        <!-- BẢNG 2: KPI HIỆU SUẤT CÔNG VIỆC (TĨNH) -->
         <div class="bg-white mt-12 mb-8 p-6 rounded-lg border border-indigo-300 shadow-md">
-            <h2 class="text-2xl font-bold text-indigo-700 mb-6">KPI HIỆU SUẤT CÔNG VIỆC </h2>
+            <h2 class="text-2xl font-bold text-indigo-700 mb-6">KPI HIỆU SUẤT CÔNG VIỆC</h2>
             <div class="table-container rounded-lg border border-gray-200 mb-6">
                 <table id="kpiTable2" class="min-w-full">
                     <thead>
                         <tr>
+                            <th>STT</th>
                             <th>Chỉ số KPI</th>
                             <th>Đạt chỉ số</th>
                             <th>Điểm KPI %</th>
-                            <th>Đánh giá điểm</th>
+                            <th>Đánh giá điểm (0-100)</th>
                             <th>Báo cáo</th>
                         </tr>
                     </thead>
                     <tbody>
-                       <tr>
-                            <td> <b style="color: red;">A.1 Xử lý đơn hàng  phát sinh thực tế đúng theo yêu cầu công việc </b></td>
-                            <td>Thực hiện kiểm hàng - đóng hàng thủ tục khai báo - dữ liệu khai đầy đủ -có báo cáo kết quả cuối kỳ</td>
-                            <td style="color:red; font-weight:bold;"class="kpi2-score">15% </td>
-                            <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
-                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
-                        </tr>
-                       
                         <tr>
-                           <td> B.1 Tỉ lệ hoàn thành đóng hàng phát sinh trong ngày đúng yêu cầu</td>
-                            <td> Hoàn thành đóng hàng thành công trên 98% đơn hàng phát sinh trong kỳ ( có báo cáo) </td>
-                            <td class="kpi2-score"> 15 %</td>
-                            <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
-                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
+                            <td>1</td>
+                            <td><b style="color: red;">Xử lý đơn hàng phát sinh thực tế đúng theo yêu cầu công việc</b></td>
+                            <td>Thực hiện kiểm hàng - đóng hàng thủ tục khai báo - dữ liệu khai đầy đủ - có báo cáo kết quả cuối kỳ</td>
+                            <td class="kpi2-score kpi-score-display">15%</td>
+                            <td><input class="kpi2-evaluation score-input border rounded-md p-2" type="number" min="0" max="100" value="0"></td>
+                            <td><textarea class="kpi2-report w-full border rounded-md p-2" rows="2">Tự đánh giá</textarea></td>
                         </tr>
-                       <tr>
-                            <td> B.2 Điều phối đơn hàng cùng giao nhận hoàn thành giao đúng trong kỳ</td>
+                        <tr>
+                            <td>2</td>
+                            <td>Tỉ lệ hoàn thành đóng hàng phát sinh trong ngày đúng yêu cầu</td>
+                            <td>Hoàn thành đóng hàng thành công trên 98% đơn hàng phát sinh trong kỳ (có báo cáo)</td>
+                            <td class="kpi2-score kpi-score-display">15%</td>
+                            <td><input class="kpi2-evaluation score-input border rounded-md p-2" type="number" min="0" max="100" value="0"></td>
+                            <td><textarea class="kpi2-report w-full border rounded-md p-2" rows="2">Tự đánh giá</textarea></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><b style="color: red;">Điều phối đơn hàng cùng giao nhận hoàn thành giao đúng trong kỳ</b></td>
                             <td>Hoàn thành giao đúng - đủ các đơn hàng trong kỳ trên 98%/số đơn hàng phát sinh</td>
-                            <td style="color:red; font-weight:bold;"class="kpi2-score"> 10% </td>
-                            <td><input class="kpi2-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
-                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
+                            <td class="kpi2-score kpi-score-display">10%</td>
+                            <td><input class="kpi2-evaluation score-input border rounded-md p-2" type="number" min="0" max="100" value="0"></td>
+                            <td><textarea class="kpi2-report w-full border rounded-md p-2" rows="2">Tự đánh giá</textarea></td>
                         </tr>
-						
-						
-						
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-right font-bold">Tổng điểm KPI bảng 2:</td>
+                            <td id="table2TotalScore" class="kpi-score-display">40%</td>
+                            <td id="table2TotalEvaluation" class="kpi-score-display">0</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
             <!-- Editor BẢNG 2 -->
@@ -134,61 +158,64 @@
                 <div id="kpi2NoteEditor" class="quill-editor"></div>
             </div>
         </div>
-        <!-- END BẢNG 2 -->
 
-        <!-- BẢNG 3 TĨNH -->
+        <!-- BẢNG 3: KPI CHÍNH XÁC - CHẤT LƯỢNG - QUẢN LÝ SOP (TĨNH) -->
         <div class="bg-white mt-12 mb-8 p-6 rounded-lg border border-green-300 shadow-md">
-            <h2 class="text-2xl font-bold text-green-700 mb-6">KPI CHÍNH XÁC - CHẤT LƯỢNG - QUẢN LÝ SOP  </h2>
+            <h2 class="text-2xl font-bold text-green-700 mb-6">KPI CHÍNH XÁC - CHẤT LƯỢNG - QUẢN LÝ SOP</h2>
             <div class="table-container rounded-lg border border-gray-200 mb-6">
                 <table id="kpiTable3" class="min-w-full">
                     <thead>
                         <tr>
+                            <th>STT</th>
                             <th>Chỉ số KPI</th>
                             <th>Đạt chỉ số</th>
                             <th>Điểm KPI %</th>
-                            <th>Đánh giá điểm</th>
+                            <th>Đánh giá điểm (0-100)</th>
                             <th>Báo cáo</th>
                         </tr>
                     </thead>
                     <tbody>
-						<tr>
-                            <td>A.1 Sai lô - hạn dùng - nhầm hàng - nhầm địa chỉ  </td>
-                            <td> Tỉ lệ sai sót 0% ( không lỗi)  </td>
-                            <td class="kpi2-score"> 15% </td>
-                         <td><input class="kpi3-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
-
-                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
-                        </tr>					
-						
-						
-						<tr>
-                            <td>A.2 Hồ sơ xuất - nhập tồn khai- khai báo ứng dụng</td>
-                            <td> Đẩy đủ > 90% có báo cáo khai báo chi tiết in - file cuối kỳ tháng  </td>
-                            <td class="kpi2-score"> 10% </td>
-                            <td><input class="kpi3-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
-
-                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
+                        <tr>
+                            <td>1</td>
+                            <td>Sai lô - hạn dùng - nhầm hàng - nhầm địa chỉ</td>
+                            <td>Tỉ lệ sai sót 0% (không lỗi)</td>
+                            <td class="kpi3-score kpi-score-display">15%</td>
+                            <td><input class="kpi3-evaluation score-input border rounded-md p-2" type="number" min="0" max="100" value="0"></td>
+                            <td><textarea class="kpi3-report w-full border rounded-md p-2" rows="2">Tự đánh giá</textarea></td>
                         </tr>
-
-						<tr>
-                            <td>A.3 Công tác hỗ trợ quản lý khách hàng giao hoàn thành trong kỳ với kinh doanh</td>
-                            <td> Thực hiện theo dõi - quản lý đơn hàng giao thành công trong kỳ </td>
-                            <td class="kpi2-score"> 15% </td>
-                            <td><input class="kpi3-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
-
-                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
+                        <tr>
+                            <td>2</td>
+                            <td>Hồ sơ xuất - nhập tồn khai - khai báo ứng dụng</td>
+                            <td>Đẩy đủ > 90% có báo cáo khai báo chi tiết in - file cuối kỳ tháng</td>
+                            <td class="kpi3-score kpi-score-display">10%</td>
+                            <td><input class="kpi3-evaluation score-input border rounded-md p-2" type="number" min="0" max="100" value="0"></td>
+                            <td><textarea class="kpi3-report w-full border rounded-md p-2" rows="2">Tự đánh giá</textarea></td>
                         </tr>
-
-							<tr>
-                            <td>A.4 Đánh giá hợp tác từ bộ phận kinh doanh ( công tác hỗ trợ trong kỳ) </td>
-                            <td> Hợp tác tốt - hỗ trợ tốt đáp ứng công việc hiễu quả   </td>
-                            <td class="kpi2-score"> 20% </td>
-                            <td><input class="kpi3-evaluation w-full border rounded-md p-1 text-center" type="number" value="0"></td>
-
-                            <td><textarea class="kpi2-report w-full border rounded-md p-1" rows="1">Em tự đánh giá</textarea></td>
+                        <tr>
+                            <td>3</td>
+                            <td>Công tác hỗ trợ quản lý khách hàng giao hoàn thành trong kỳ với kinh doanh</td>
+                            <td>Thực hiện theo dõi - quản lý đơn hàng giao thành công trong kỳ</td>
+                            <td class="kpi3-score kpi-score-display">15%</td>
+                            <td><input class="kpi3-evaluation score-input border rounded-md p-2" type="number" min="0" max="100" value="0"></td>
+                            <td><textarea class="kpi3-report w-full border rounded-md p-2" rows="2">Tự đánh giá</textarea></td>
                         </tr>
-						
+                        <tr>
+                            <td>4</td>
+                            <td>Đánh giá hợp tác từ bộ phận kinh doanh (công tác hỗ trợ trong kỳ)</td>
+                            <td>Hợp tác tốt - hỗ trợ tốt đáp ứng công việc hiệu quả</td>
+                            <td class="kpi3-score kpi-score-display">15%</td>
+                            <td><input class="kpi3-evaluation score-input border rounded-md p-2" type="number" min="0" max="100" value="0"></td>
+                            <td><textarea class="kpi3-report w-full border rounded-md p-2" rows="2">Tự đánh giá</textarea></td>
+                        </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-right font-bold">Tổng điểm KPI bảng 3:</td>
+                            <td id="table3TotalScore" class="kpi-score-display">60%</td>
+                            <td id="table3TotalEvaluation" class="kpi-score-display">0</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
             <!-- Editor BẢNG 3 -->
@@ -197,166 +224,278 @@
                 <div id="kpi3NoteEditor" class="quill-editor"></div>
             </div>
         </div>
-        <!-- END BẢNG 3 -->
-        
-		<div class="mt-4 p-4 border border-dashed border-green-500 bg-green-50 rounded-xl shadow-sm">
-  <div class="font-semibold mb-2 text-green-700">QUY ĐỊNH THƯỞNG KPI </div>
-  <div class="text-gray-700 leading-relaxed">
- 
- <p><b>THƯỞNG NỖ LỰC CÔNG VIỆC HOÀN THÀNH MỤC TIÊU NGOÀI THƯỞNG THU NHẬP KPI</b></p>
 
-<p><b>A. Áp dụng cho Phụ trách kho dược – kiêm hỗ trợ kinh doanh</b></p>
-
-<p><b>1. Thưởng tăng trưởng doanh thu khách hàng phụ trách:</b><br>
-Xét doanh thu kỳ hiện tại so với kỳ trước (số liệu phải được xác nhận bởi bộ phận kinh doanh và có báo cáo giải trình đầy đủ).</p>
-
-<p><b>- Mức thưởng:</b><br>
-• Tăng từ 2% đến 10%: Thưởng 200,000 VNĐ.<br>
-• Tăng từ 11% trở lên: Thưởng 500,000 VNĐ.</p>
-( Khoản thưởng này phải có xác nhận đánh giá của người phụ trách chính khách hàng trực thuộc bộ phận kinh doanh để nhận thưởng )
-	  
-<p><b>2. Thưởng hoàn thành đơn hàng vượt mức:</b><br>
-Khi số lượng đơn hàng đã đóng gói và xác nhận thành công (đúng tiến độ) vượt mức cơ bản 30 đơn/kỳ.</p>
-
-<p><b>- Cách tính:</b><br>
-• Từ đơn hàng thứ 31 trở đi: Mỗi đơn phát sinh được cộng thêm 2% điểm KPI thưởng.<br>
-• <i>(Ví dụ: Hoàn thành 35 đơn → Thưởng thêm: (35-30)*2% = 10% điểm KPI)</i></p>
-
-<p><b>Điều kiện áp dụng:</b><br>
-• Tất cả số liệu phải có báo cáo rõ ràng, được xác nhận từ bộ phận liên quan.<br>
-• Việc xét duyệt và thanh toán thưởng tuân theo quy trình phê duyệt của công ty.</p>
- 
-  
- 
-	   
-<p><b>1.</b> Lỗi phát hiện không lập phiếu xuất - nhập kho - biên bản nhận hàng - lưu in đúng  <b> Trừ 15% điểm KPI/phiếu/người phụ trách</b>.</p>
-<p><b>2.</b> Lỗi phát hiện tồn kho cuối kỳ trên ERP - ỨNG DỤNG QUÀN LÝ KHO sai  lệch lớn trên +/- 10% số lượng/1 loại <b> Trừ 15% điểm KPI/ mọi nhân sự kho giao nhận</b>.</p>
-<p><b>3.</b> Lỗi không gởi báo cáo đúng hạn cuối kỳ - không lập biên bản khi kiểm kho có xác nhận đầy đủ  <b> Trừ 10 điểm KPI/ kế toán - kho vận team</b>.</p>
-
-<p><b>4.</b> Lỗi xuất hàng giao thuốc nhầm lẫn Lô - hạn dụng gây phải đổi trà- điều chỉnh hóa đơn  <b> Trứ 15% điểm KPI/ lần sai/phụ trách kho và giao nhận </b>.</p>
-<p><b>5.</b> Lỗi phát hiện không tuân thủ quy trình -quy định SOP liên quan kho  <b> Trừ 15% điểm KPI/lỗi/người phụ trách và trừ cấp quản lý 20% KPI </b>.</p>
-
-  </div>
-</div>
-
-        <!-- Tổng điểm KPI -->
-        <div class="container mx-auto bg-white mb-12 p-6 rounded-lg shadow flex justify-end">
-            <div class="text-right">
-                <span class="font-semibold text-lg">TỔNG ĐIỂM KPI (cộng tất cả các ô Đánh giá điểm): </span>
-                <span class="font-bold text-indigo-600 text-2xl" id="total-evaluation-score">0</span>
+        <!-- QUY ĐỊNH THƯỞNG KPI -->
+        <div class="mt-4 p-6 border border-dashed border-green-500 bg-green-50 rounded-xl shadow-sm mb-8">
+            <div class="font-semibold mb-4 text-green-700 text-lg">QUY ĐỊNH THƯỞNG KPI</div>
+            <div class="text-gray-700 leading-relaxed space-y-3">
+                <p><b>THƯỞNG NỖ LỰC CÔNG VIỆC HOÀN THÀNH MỤC TIÊU NGOÀI THƯỞNG THU NHẬP KPI</b></p>
+                <p><b>A. Áp dụng cho Phụ trách kho dược – kiêm hỗ trợ kinh doanh</b></p>
+                <p><b>1. Thưởng tăng trưởng doanh thu khách hàng phụ trách:</b><br>
+                Xét doanh thu kỳ hiện tại so với kỳ trước (số liệu phải được xác nhận bởi bộ phận kinh doanh và có báo cáo giải trình đầy đủ).</p>
+                <p><b>- Mức thưởng:</b><br>
+                • Tăng từ 3% đến 12%: Thưởng 200,000 VNĐ.<br>
+                • Tăng từ 13% trở lên: Thưởng 800,000 VNĐ.</p>
+                <p><b>2. Thưởng hoàn thành đơn hàng vượt mức:</b><br>
+                Khi số lượng đơn hàng đã đóng gói và xác nhận thành công (đúng tiến độ) vượt mức cơ bản 30 đơn/kỳ.</p>
+                <p><b>- Cách tính:</b><br>
+                • Từ đơn hàng thứ 31 trở đi: Mỗi đơn phát sinh được cộng thêm 2% điểm KPI thưởng.<br>
+                • <i>(Ví dụ: Hoàn thành 35 đơn → Thưởng thêm: (35-30)*2% = 10% điểm KPI)</i></p>
+                <p><b>Điều kiện áp dụng:</b><br>
+                • Tất cả số liệu phải có báo cáo rõ ràng, được xác nhận từ bộ phận liên quan.<br>
+                • Việc xét duyệt và thanh toán thưởng tuân theo quy trình phê duyệt của công ty.</p>
+                
+                <div class="mt-4 pt-4 border-t border-gray-300">
+                    <p class="font-bold text-red-600">QUY ĐỊNH TRỪ ĐIỂM KPI:</p>
+                    <p><b>1.</b> Lỗi phát hiện không lập phiếu xuất - nhập kho - biên bản nhận hàng - lưu in đúng <b>Trừ 15% điểm KPI/phiếu/người phụ trách</b>.</p>
+                    <p><b>2.</b> Lỗi phát hiện tồn kho cuối kỳ trên ERP - ỨNG DỤNG QUẢN LÝ KHO sai lệch lớn trên +/- 10% số lượng/1 loại <b>Trừ 15% điểm KPI/mọi nhân sự kho giao nhận</b>.</p>
+                    <p><b>3.</b> Lỗi không gởi báo cáo đúng hạn cuối kỳ - không lập biên bản khi kiểm kho có xác nhận đầy đủ <b>Trừ 10 điểm KPI/kế toán - kho vận team</b>.</p>
+                    <p><b>4.</b> Lỗi xuất hàng giao thuốc nhầm lẫn Lô - hạn dụng gây phải đổi trả - điều chỉnh hóa đơn <b>Trừ 15% điểm KPI/lần sai/phụ trách kho và giao nhận</b>.</p>
+                    <p><b>5.</b> Lỗi phát hiện không tuân thủ quy trình - quy định SOP liên quan kho <b>Trừ 15% điểm KPI/lỗi/người phụ trách và trừ cấp quản lý 20% KPI</b>.</p>
+                </div>
             </div>
         </div>
 
+        <!-- TỔNG ĐIỂM KPI -->
+        <div class="total-score-box mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="text-center">
+                    <div class="text-sm opacity-90">Tổng điểm bảng 1</div>
+                    <div class="text-2xl font-bold" id="finalTable1Score">0</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-sm opacity-90">Tổng điểm bảng 2</div>
+                    <div class="text-2xl font-bold" id="finalTable2Score">0</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-sm opacity-90">Tổng điểm bảng 3</div>
+                    <div class="text-2xl font-bold" id="finalTable3Score">0</div>
+                </div>
+                <div class="text-center border-l border-white/30 pl-4">
+                    <div class="text-sm opacity-90">TỔNG ĐIỂM KPI</div>
+                    <div class="text-4xl font-bold" id="totalEvaluationScore">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NÚT HÀNH ĐỘNG -->
         <div class="flex flex-wrap gap-4 justify-center md:justify-start">
             <button id="saveKpiBtn" class="action-button">Lưu lại</button>
             <button id="exportPdfBtn" class="action-button secondary-button">Xuất file PDF</button>
+            <button id="exportHtmlBtn" class="action-button secondary-button">Xuất file HTML</button>
             <button id="backToListBtn" class="action-button secondary-button">Quay lại Danh sách</button>
-			<button id="exportHtmlBtn" class="action-button secondary-button">Xuất file gởi điểm KPI </button>
-
         </div>
     </div>
 
     <!-- MODAL DANH SÁCH KPI -->
     <div id="kpiListModal" class="modal">
         <div class="modal-content">
-            <span class="float-right text-xl cursor-pointer" id="closeModalBtn">&times;</span>
-            <h2 class="text-2xl font-semibold mb-6 text-gray-800">KPI PHỤ TRÁCH ĐIỀU PHỐI KHO DƯỢC/h2>
-            <button id="addNewKpiFromModalBtn" class="action-button mb-6 w-full">Thêm mới Bảng KPI</button>
-             <a href="https://erp-ideco.skyit.vn/#/app/dashboard/main" target="_blank" class="action-button secondary-button mb-4 w-full text-center block">ERP HOME</a>
-            <div id="savedKpiList" class="space-y-3 max-h-96 overflow-y-auto"></div>
+            <span class="float-right text-2xl cursor-pointer hover:text-gray-700" id="closeModalBtn">&times;</span>
+            <h2 class="text-2xl font-semibold mb-6 text-gray-800">QUẢN LÝ BẢNG KPI PHỤ TRÁCH KHO</h2>
+            <button id="addNewKpiFromModalBtn" class="action-button mb-4 w-full">Thêm mới Bảng KPI</button>
+            <a href="https://erp-ideco.skyit.vn/#/app/dashboard/main" target="_blank" class="secondary-button mb-6 w-full text-center block py-2 rounded-md">ERP HOME</a>
+            <div class="text-sm text-gray-500 mb-3">Danh sách KPI đã lưu:</div>
+            <div id="savedKpiList" class="space-y-3 max-h-96 overflow-y-auto p-2"></div>
         </div>
     </div>
 
 <script>
+// ========== FIREBASE CONFIG ==========
 const firebaseConfig = {
-  apiKey: "AIzaSyCC2KUiYoGrEWl3GUCk2xUoUU_TQTX-0rw",
-  authDomain: "kpi-7d405.firebaseapp.com",
-  databaseURL: "https://kpi-7d405-default-rtdb.firebaseio.com",
-  projectId: "kpi-7d405",
-  storageBucket: "kpi-7d405.appspot.com",
-  messagingSenderId: "408635637678",
-  appId: "1:408635637678:web:435407046d80ddc42cd23f",
-  measurementId: "G-Y9KH6RT5V0"
+    apiKey: "AIzaSyCC2KUiYoGrEWl3GUCk2xUoUU_TQTX-0rw",
+    authDomain: "kpi-7d405.firebaseapp.com",
+    databaseURL: "https://kpi-7d405-default-rtdb.firebaseio.com",
+    projectId: "kpi-7d405",
+    storageBucket: "kpi-7d405.appspot.com",
+    messagingSenderId: "408635637678",
+    appId: "1:408635637678:web:435407046d80ddc42cd23f",
+    measurementId: "G-Y9KH6RT5V0"
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
+// ========== BIẾN TOÀN CỤC ==========
 const mainKpiForm = document.getElementById('mainKpiForm');
-const kpiTableBody = document.getElementById('kpiTableBody');
+const kpiTable1Body = document.getElementById('kpiTable1Body');
 const addRowBtn = document.getElementById('addRowBtn');
 const saveKpiBtn = document.getElementById('saveKpiBtn');
 const exportPdfBtn = document.getElementById('exportPdfBtn');
+const exportHtmlBtn = document.getElementById('exportHtmlBtn');
 const backToListBtn = document.getElementById('backToListBtn');
 const kpiListModal = document.getElementById('kpiListModal');
 const closeModalBtn = document.getElementById('closeModalBtn');
 const savedKpiListDiv = document.getElementById('savedKpiList');
 const addNewKpiFromModalBtn = document.getElementById('addNewKpiFromModalBtn');
 let currentKpiId = null;
+let rowCounter = 0;
 
-// --- QuillJS Editor toolbar config ---
+// ========== QUILL EDITORS ==========
 const quillToolbar = [
-  ['bold', 'italic', 'underline', 'strike'],
-  [{ 'font': [] }],
-  [{ 'size': ['small', false, 'large', 'huge'] }],
-  [{ 'align': [] }],
-  [{ 'color': [] }, { 'background': [] }],
-  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-  ['clean']
+    ['bold', 'italic', 'underline', 'strike'],
+    [{ 'font': [] }],
+    [{ 'size': ['small', false, 'large', 'huge'] }],
+    [{ 'align': [] }],
+    [{ 'color': [] }, { 'background': [] }],
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    ['clean']
 ];
 
 let kpi2NoteEditor, kpi3NoteEditor;
 
-// Khởi tạo editor sau khi DOM loaded
 function initEditors() {
     kpi2NoteEditor = new Quill('#kpi2NoteEditor', {
-      modules: { toolbar: quillToolbar },
-      theme: 'snow'
+        modules: { toolbar: quillToolbar },
+        theme: 'snow'
     });
     kpi3NoteEditor = new Quill('#kpi3NoteEditor', {
-      modules: { toolbar: quillToolbar },
-      theme: 'snow'
+        modules: { toolbar: quillToolbar },
+        theme: 'snow'
     });
 }
+
 function resetEditors() {
     kpi2NoteEditor.root.innerHTML = '';
     kpi3NoteEditor.root.innerHTML = '';
 }
 
+// ========== HÀM TIỆN ÍCH ==========
 function generateId() {
     return '_' + Math.random().toString(36).substr(2, 9) + Date.now();
 }
-function showForm() { mainKpiForm.style.display = 'block'; }
-function hideForm() { mainKpiForm.style.display = 'none'; }
-function openModal() { displaySavedKpis(); kpiListModal.style.display = 'block'; }
-function closeModal() { kpiListModal.style.display = 'none'; }
 
-function addKpiRow(data = {}) {
-    const row = kpiTableBody.insertRow();
-    row.innerHTML = `
-        <td><textarea class="kpiIndicator w-full p-2 border rounded-md" placeholder="Mô tả chỉ số">${data.kpiIndicator||''}</textarea></td>
-        <td><input type="text" class="achievedIndicator w-full p-2 border rounded-md" value="${data.achievedIndicator||''}"></td>
-        <td><input type="number" class="kpiScore w-full p-2 border rounded-md" value="${data.kpiScore||''}"></td>
-        <td><input type="number" class="scoreEvaluation w-full p-2 border rounded-md" value="${data.scoreEvaluation||''}"></td>
-        <td><textarea class="reportNotes w-full p-2 border rounded-md">${data.reportNotes||''}</textarea></td>
-        <td class="text-center"><button class="deleteRowBtn danger-button text-xs px-2 py-1">Xóa</button></td>
-    `;
-    row.querySelector('.deleteRowBtn').onclick = ()=>{ row.remove(); calcTotalEvaluationScore(); };
-    row.querySelector('.scoreEvaluation').addEventListener('input', calcTotalEvaluationScore);
+function showForm() { 
+    mainKpiForm.style.display = 'block'; 
 }
 
-addRowBtn.onclick = ()=>addKpiRow();
+function hideForm() { 
+    mainKpiForm.style.display = 'none'; 
+}
 
+function openModal() { 
+    displaySavedKpis(); 
+    kpiListModal.style.display = 'block'; 
+}
+
+function closeModal() { 
+    kpiListModal.style.display = 'none'; 
+}
+
+// ========== THÊM HÀNG VÀO BẢNG 1 (ĐỘNG) ==========
+function addKpiRow(data = {}) {
+    rowCounter++;
+    const row = kpiTable1Body.insertRow();
+    row.innerHTML = `
+        <td class="text-center font-bold">${rowCounter}</td>
+        <td><textarea class="kpiIndicator w-full p-2 border rounded-md" placeholder="Mô tả chỉ số KPI">${data.kpiIndicator||''}</textarea></td>
+        <td><input type="text" class="achievedIndicator w-full p-2 border rounded-md" value="${data.achievedIndicator||''}" placeholder="Chỉ số đạt được"></td>
+        <td><input type="number" class="kpiScore score-input border rounded-md p-2" value="${data.kpiScore||''}" placeholder="%" min="0" max="100"></td>
+        <td><input type="number" class="scoreEvaluation score-input border rounded-md p-2" value="${data.scoreEvaluation||'0'}" placeholder="Điểm" min="0" max="100"></td>
+        <td><textarea class="reportNotes w-full p-2 border rounded-md" rows="2" placeholder="Báo cáo chi tiết">${data.reportNotes||''}</textarea></td>
+        <td class="text-center"><button class="deleteRowBtn danger-button text-xs px-3 py-1 rounded">Xóa</button></td>
+    `;
+    
+    // Xử lý sự kiện xóa hàng
+    row.querySelector('.deleteRowBtn').onclick = () => {
+        row.remove();
+        updateRowNumbers();
+        calculateAllScores();
+    };
+    
+    // Xử lý sự kiện tính điểm
+    const scoreInput = row.querySelector('.scoreEvaluation');
+    const kpiScoreInput = row.querySelector('.kpiScore');
+    
+    scoreInput.addEventListener('input', calculateAllScores);
+    kpiScoreInput.addEventListener('input', calculateAllScores);
+    
+    return row;
+}
+
+// Cập nhật số thứ tự
+function updateRowNumbers() {
+    const rows = kpiTable1Body.querySelectorAll('tr');
+    rowCounter = 0;
+    rows.forEach((row, index) => {
+        rowCounter++;
+        row.cells[0].textContent = rowCounter;
+    });
+}
+
+// ========== TÍNH ĐIỂM TỔNG HỢP ==========
+function calculateAllScores() {
+    let table1TotalScore = 0;
+    let table1TotalEvaluation = 0;
+    
+    // Tính bảng 1
+    const rows = kpiTable1Body.querySelectorAll('tr');
+    rows.forEach(row => {
+        const score = parseFloat(row.querySelector('.scoreEvaluation').value) || 0;
+        const kpiScore = parseFloat(row.querySelector('.kpiScore').value) || 0;
+        
+        table1TotalScore += kpiScore;
+        table1TotalEvaluation += score;
+    });
+    
+    // Tính bảng 2
+    let table2TotalEvaluation = 0;
+    let table2TotalScore = 0;
+    document.querySelectorAll('#kpiTable2 .kpi2-evaluation').forEach(input => {
+        table2TotalEvaluation += parseFloat(input.value) || 0;
+    });
+    document.querySelectorAll('#kpiTable2 .kpi2-score').forEach(cell => {
+        const score = parseFloat(cell.textContent) || 0;
+        table2TotalScore += score;
+    });
+    
+    // Tính bảng 3
+    let table3TotalEvaluation = 0;
+    let table3TotalScore = 0;
+    document.querySelectorAll('#kpiTable3 .kpi3-evaluation').forEach(input => {
+        table3TotalEvaluation += parseFloat(input.value) || 0;
+    });
+    document.querySelectorAll('#kpiTable3 .kpi3-score').forEach(cell => {
+        const score = parseFloat(cell.textContent) || 0;
+        table3TotalScore += score;
+    });
+    
+    // Cập nhật tổng điểm từng bảng
+    document.getElementById('table1TotalScore').textContent = table1TotalScore + '%';
+    document.getElementById('table1TotalEvaluation').textContent = table1TotalEvaluation;
+    document.getElementById('finalTable1Score').textContent = table1TotalEvaluation;
+    
+    document.getElementById('table2TotalEvaluation').textContent = table2TotalEvaluation;
+    document.getElementById('finalTable2Score').textContent = table2TotalEvaluation;
+    
+    document.getElementById('table3TotalEvaluation').textContent = table3TotalEvaluation;
+    document.getElementById('finalTable3Score').textContent = table3TotalEvaluation;
+    
+    // Tổng điểm cuối cùng
+    const totalScore = table1TotalEvaluation + table2TotalEvaluation + table3TotalEvaluation;
+    document.getElementById('totalEvaluationScore').textContent = totalScore;
+    
+    return {
+        table1: { score: table1TotalScore, evaluation: table1TotalEvaluation },
+        table2: { score: table2TotalScore, evaluation: table2TotalEvaluation },
+        table3: { score: table3TotalScore, evaluation: table3TotalEvaluation },
+        total: totalScore
+    };
+}
+
+// ========== LƯU DỮ LIỆU KPI ==========
 function saveKpiData() {
     const creatorName = document.getElementById('creatorName').value.trim();
     const department = document.getElementById('department').value.trim();
     const creationDate = document.getElementById('creationDate').value;
+    
     if (!creatorName || !department || !creationDate) {
         alert('Vui lòng nhập đầy đủ Tên người lập, Bộ phận và Ngày lập.');
         return false;
     }
+    
+    // Thu thập dữ liệu bảng 1
     const kpiRowsData = [];
-    const rows = kpiTableBody.querySelectorAll('tr');
-    rows.forEach(row=>{
+    const rows = kpiTable1Body.querySelectorAll('tr');
+    rows.forEach(row => {
         const kpiIndicator = row.querySelector('.kpiIndicator');
         if (kpiIndicator && kpiIndicator.value.trim()) {
             kpiRowsData.push({
@@ -368,344 +507,464 @@ function saveKpiData() {
             });
         }
     });
-
-    // Lưu nội dung Quill editor
+    
+    // Thu thập dữ liệu bảng 2
+    const kpi2Data = [];
+    document.querySelectorAll('#kpiTable2 tbody tr').forEach((row, index) => {
+        kpi2Data.push({
+            evaluation: row.querySelector('.kpi2-evaluation').value,
+            report: row.querySelector('.kpi2-report').value
+        });
+    });
+    
+    // Thu thập dữ liệu bảng 3
+    const kpi3Data = [];
+    document.querySelectorAll('#kpiTable3 tbody tr').forEach((row, index) => {
+        kpi3Data.push({
+            evaluation: row.querySelector('.kpi3-evaluation').value,
+            report: row.querySelector('.kpi3-report').value
+        });
+    });
+    
+    // Lấy nội dung editor
     const kpi2Note = kpi2NoteEditor.root.innerHTML;
     const kpi3Note = kpi3NoteEditor.root.innerHTML;
-
-    // Lưu giá trị đánh giá từ các bảng tĩnh
-    const kpi2Evaluations = Array.from(document.querySelectorAll('#kpiTable2 .kpi2-evaluation')).map(el => el.value);
-    const kpi3Evaluations = Array.from(document.querySelectorAll('#kpiTable3 .kpi3-evaluation')).map(el => el.value);
-
-    let kpiData = {
-        creatorName, department, creationDate, kpiRows: kpiRowsData,
-        kpi2Note, kpi3Note,
-        kpi2Evaluations, kpi3Evaluations, // Thêm dữ liệu đánh giá từ các bảng tĩnh
-        year: new Date().getFullYear(), id: currentKpiId || generateId()
+    
+    // Tính tổng điểm
+    const scores = calculateAllScores();
+    
+    // Tạo đối tượng dữ liệu
+    const kpiData = {
+        creatorName,
+        department,
+        creationDate,
+        kpiRows: kpiRowsData,
+        kpi2Data,
+        kpi3Data,
+        kpi2Note,
+        kpi3Note,
+        scores,
+        year: new Date().getFullYear(),
+        month: new Date().getMonth() + 1,
+        id: currentKpiId || generateId(),
+        lastModified: new Date().toISOString()
     };
-    db.ref('kpiBoards_v2/'+kpiData.id).set(kpiData, err=>{
-        if (err) alert('Lỗi khi lưu lên server: '+err.message);
-        else {
-            alert('Đã lưu bảng KPI!');
+    
+    // Lưu lên Firebase
+    db.ref('kpiBoards_kho/' + kpiData.id).set(kpiData, err => {
+        if (err) {
+            alert('Lỗi khi lưu lên server: ' + err.message);
+        } else {
+            alert('Đã lưu bảng KPI thành công!');
             currentKpiId = kpiData.id;
             displaySavedKpis();
         }
     });
+    
     return true;
 }
-saveKpiBtn.onclick = ()=>saveKpiData();
 
+// ========== HIỂN THỊ DANH SÁCH KPI ĐÃ LƯU ==========
 function displaySavedKpis() {
-    savedKpiListDiv.innerHTML = '<p class="text-gray-500">Đang tải dữ liệu...</p>';
-    db.ref('kpiBoards_v2').once('value', snapshot=>{
-        const kpisObj = snapshot.val()||{};
+    savedKpiListDiv.innerHTML = '<p class="text-gray-500 text-center py-4">Đang tải dữ liệu...</p>';
+    
+    db.ref('kpiBoards_kho').once('value', snapshot => {
+        const kpisObj = snapshot.val() || {};
         const kpis = Object.values(kpisObj);
+        
         savedKpiListDiv.innerHTML = '';
+        
         if (kpis.length === 0) {
-            savedKpiListDiv.innerHTML = '<p class="text-gray-500">Chưa có bảng KPI nào được lưu.</p>'; return;
+            savedKpiListDiv.innerHTML = '<p class="text-gray-500 text-center py-4">Chưa có bảng KPI nào được lưu.</p>';
+            return;
         }
-        kpis.sort((a,b)=>b.creationDate.localeCompare(a.creationDate));
-        kpis.forEach(kpi=>{
+        
+        // Sắp xếp theo ngày mới nhất
+        kpis.sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate));
+        
+        kpis.forEach(kpi => {
             const div = document.createElement('div');
-            div.className = 'kpi-list-item p-4 border rounded-md shadow-sm flex justify-between items-center bg-gray-50';
+            div.className = 'kpi-list-item p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer bg-white';
+            
+            const totalScore = kpi.scores ? kpi.scores.total : 0;
+            
             div.innerHTML = `
-                <div class="flex-grow cursor-pointer">
-                    <p class="font-semibold text-indigo-600">${kpi.creatorName} (${kpi.year})</p>
-                    <p class="text-sm text-gray-600">${kpi.department} - ${kpi.creationDate}</p>
+                <div class="flex justify-between items-start">
+                    <div class="flex-grow">
+                        <p class="font-semibold text-indigo-700">${kpi.creatorName}</p>
+                        <p class="text-sm text-gray-600">${kpi.department} • ${kpi.creationDate}</p>
+                        <p class="text-xs text-gray-500 mt-1">${kpi.kpiRows ? kpi.kpiRows.length : 0} chỉ số • ID: ${kpi.id.substring(0, 8)}...</p>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-bold text-lg ${totalScore >= 80 ? 'text-green-600' : totalScore >= 60 ? 'text-yellow-600' : 'text-red-600'}">
+                            ${totalScore} điểm
+                        </div>
+                        <button class="deleteSavedKpiBtn danger-button text-xs px-2 py-1 mt-2 rounded" data-id="${kpi.id}">Xóa</button>
+                    </div>
                 </div>
-                <button class="deleteSavedKpiBtn danger-button text-xs px-2 py-1" data-id="${kpi.id}">Xóa</button>
             `;
-            div.querySelector('.flex-grow').onclick = ()=>loadKpiToForm(kpi.id);
-            div.querySelector('.deleteSavedKpiBtn').onclick = e=>{
-                e.stopPropagation(); 
-                // --- Xác nhận password khi xóa ---
+            
+            // Click để mở KPI
+            div.querySelector('.flex-grow').onclick = () => loadKpiToForm(kpi.id);
+            
+            // Nút xóa
+            div.querySelector('.deleteSavedKpiBtn').onclick = e => {
+                e.stopPropagation();
                 const password = prompt('Vui lòng nhập mật khẩu để xác nhận xóa:');
                 if (password !== 'minhtriet1973') {
                     alert('Sai mật khẩu! Không được xóa.');
                     return;
                 }
-                deleteKpi(kpi.id);
+                if (confirm('Bạn có chắc chắn muốn xóa bảng KPI này?')) {
+                    deleteKpi(kpi.id);
+                }
             };
+            
             savedKpiListDiv.appendChild(div);
         });
     });
 }
 
+// ========== TẢI KPI VÀO FORM ==========
 function loadKpiToForm(kpiId) {
-    db.ref('kpiBoards_v2/'+kpiId).once('value', snap=>{
+    db.ref('kpiBoards_kho/' + kpiId).once('value', snap => {
         const kpi = snap.val();
         if (kpi) {
             currentKpiId = kpiId;
+            
+            // Điền thông tin cơ bản
             document.getElementById('creatorName').value = kpi.creatorName;
             document.getElementById('department').value = kpi.department;
             document.getElementById('creationDate').value = kpi.creationDate;
-            kpiTableBody.innerHTML = '';
-            (kpi.kpiRows||[]).forEach(r=>addKpiRow(r));
-            if ((kpi.kpiRows||[]).length===0) addKpiRow();
             
-            // Khôi phục giá trị đánh giá từ các bảng tĩnh
-            if (kpi.kpi2Evaluations) {
-                document.querySelectorAll('#kpiTable2 .kpi2-evaluation').forEach((el, index) => {
-                    if (kpi.kpi2Evaluations[index]) el.value = kpi.kpi2Evaluations[index];
+            // Tải bảng 1
+            kpiTable1Body.innerHTML = '';
+            rowCounter = 0;
+            (kpi.kpiRows || []).forEach(r => addKpiRow(r));
+            if ((kpi.kpiRows || []).length === 0) addKpiRow();
+            
+            // Tải bảng 2
+            if (kpi.kpi2Data) {
+                document.querySelectorAll('#kpiTable2 .kpi2-evaluation').forEach((input, index) => {
+                    if (kpi.kpi2Data[index]) input.value = kpi.kpi2Data[index].evaluation;
+                });
+                document.querySelectorAll('#kpiTable2 .kpi2-report').forEach((textarea, index) => {
+                    if (kpi.kpi2Data[index]) textarea.value = kpi.kpi2Data[index].report;
                 });
             }
             
-            if (kpi.kpi3Evaluations) {
-                document.querySelectorAll('#kpiTable3 .kpi3-evaluation').forEach((el, index) => {
-                    if (kpi.kpi3Evaluations[index]) el.value = kpi.kpi3Evaluations[index];
+            // Tải bảng 3
+            if (kpi.kpi3Data) {
+                document.querySelectorAll('#kpiTable3 .kpi3-evaluation').forEach((input, index) => {
+                    if (kpi.kpi3Data[index]) input.value = kpi.kpi3Data[index].evaluation;
+                });
+                document.querySelectorAll('#kpiTable3 .kpi3-report').forEach((textarea, index) => {
+                    if (kpi.kpi3Data[index]) textarea.value = kpi.kpi3Data[index].report;
                 });
             }
             
-            // Đọc nội dung note editor
+            // Tải nội dung editor
             kpi2NoteEditor.root.innerHTML = kpi.kpi2Note || '';
             kpi3NoteEditor.root.innerHTML = kpi.kpi3Note || '';
-            showForm(); closeModal();
-            calcTotalEvaluationScore();
+            
+            // Hiển thị form
+            showForm();
+            closeModal();
+            
+            // Tính toán lại điểm
+            calculateAllScores();
         }
     });
 }
-function resetMainFormAndShow() {
+
+// ========== XÓA KPI ==========
+function deleteKpi(kpiIdToDelete) {
+    db.ref('kpiBoards_kho/' + kpiIdToDelete).remove().then(() => {
+        displaySavedKpis();
+        if (currentKpiId === kpiIdToDelete) {
+            currentKpiId = null;
+            resetMainForm();
+        }
+    });
+}
+
+// ========== RESET FORM ==========
+function resetMainForm() {
     document.getElementById('creatorName').value = '';
     document.getElementById('department').value = '';
     document.getElementById('creationDate').valueAsDate = new Date();
-    kpiTableBody.innerHTML = ''; addKpiRow();
+    
+    kpiTable1Body.innerHTML = '';
+    rowCounter = 0;
+    addKpiRow();
+    
     resetEditors();
-    currentKpiId = null; showForm(); closeModal();
-    calcTotalEvaluationScore();
+    
+    // Reset bảng 2
+    document.querySelectorAll('#kpiTable2 .kpi2-evaluation').forEach(input => input.value = '0');
+    document.querySelectorAll('#kpiTable2 .kpi2-report').forEach(textarea => textarea.value = 'Tự đánh giá');
+    
+    // Reset bảng 3
+    document.querySelectorAll('#kpiTable3 .kpi3-evaluation').forEach(input => input.value = '0');
+    document.querySelectorAll('#kpiTable3 .kpi3-report').forEach(textarea => textarea.value = 'Tự đánh giá');
+    
+    calculateAllScores();
 }
 
-function deleteKpi(kpiIdToDelete) {
-    db.ref('kpiBoards_v2/'+kpiIdToDelete).remove().then(()=>{
-        displaySavedKpis();
-        if (currentKpiId===kpiIdToDelete) {
-            currentKpiId = null; resetMainFormAndShow(); hideForm(); openModal();
-        }
-    });
-}
-
-addNewKpiFromModalBtn.onclick = resetMainFormAndShow;
-closeModalBtn.onclick = closeModal;
-backToListBtn.onclick = ()=>{ hideForm(); openModal(); };
-
-document.getElementById('exportPdfBtn').onclick = function () {
-    const creatorName = document.getElementById('creatorName').value.trim().replace(/[^a-zA-Z0-9]/g,'');
-    const department = document.getElementById('department').value.trim().replace(/[^a-zA-Z0-9]/g,'');
+// ========== XUẤT PDF ==========
+exportPdfBtn.onclick = function() {
+    const creatorName = document.getElementById('creatorName').value.trim();
+    const department = document.getElementById('department').value.trim();
     const creationDate = document.getElementById('creationDate').value;
+    
     if (!creatorName || !department || !creationDate) {
-        alert('Vui lòng nhập đủ Tên người lập, Bộ phận, Ngày lập trước khi xuất PDF!');
+        alert('Vui lòng nhập đủ thông tin trước khi xuất PDF!');
         return;
     }
-    // Ẩn các nút xuất PDF, xuất HTML, v.v. cho sạch
-    document.getElementById('exportPdfBtn').style.display = 'none';
-    document.getElementById('exportHtmlBtn').style.display = 'none';
-    document.getElementById('saveKpiBtn').style.display = 'none';
-    document.getElementById('backToListBtn').style.display = 'none';
-
-    // Lấy vùng xuất (cả giao diện form chính)
+    
+    // Ẩn các nút không cần thiết
+    const buttonsToHide = ['exportPdfBtn', 'exportHtmlBtn', 'saveKpiBtn', 'backToListBtn', 'addRowBtn'];
+    buttonsToHide.forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.style.display = 'none';
+    });
+    
     const element = document.getElementById('mainKpiForm');
     const opt = {
-        margin:       [0.3, 0.3, 0.3, 0.3], // lề các bên
-        filename:     `${creatorName}-${department}-${creationDate}.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
-        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
-        pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
+        margin: [0.5, 0.5, 0.5, 0.5],
+        filename: `KPI_${creatorName}_${department}_${creationDate}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
     };
+    
     html2pdf().set(opt).from(element).save().then(() => {
-        // Hiện lại nút sau khi xong
-        document.getElementById('exportPdfBtn').style.display = '';
-        document.getElementById('exportHtmlBtn').style.display = '';
-        document.getElementById('saveKpiBtn').style.display = '';
-        document.getElementById('backToListBtn').style.display = '';
+        // Hiện lại nút
+        buttonsToHide.forEach(id => {
+            const btn = document.getElementById(id);
+            if (btn) btn.style.display = '';
+        });
     });
 };
 
-// --- TÍNH TỔNG "Đánh giá điểm" cả 3 bảng ---
-function calcTotalEvaluationScore() {
-    let sum = 0;
-    // Bảng 1 (động)
-    document.querySelectorAll('#kpiTableBody .scoreEvaluation').forEach(cell => {
-        let val = parseFloat(cell.value);
-        if (!isNaN(val)) sum += val;
-    });
-    // Bảng 2 (tĩnh)
-    document.querySelectorAll('#kpiTable2 .kpi2-evaluation').forEach(input => {
-        let v = parseFloat(input.value);
-        if (!isNaN(v)) sum += v;
-    });
-    // Bảng 3 (tĩnh)
-    document.querySelectorAll('#kpiTable3 .kpi3-evaluation').forEach(input => {
-        let v = parseFloat(input.value);
-        if (!isNaN(v)) sum += v;
-    });
-    document.getElementById('total-evaluation-score').textContent = sum;
-}
-
-// Sự kiện auto update tổng điểm khi nhập
-function addEvaluationInputEvents() {
-    // Bảng 1
-    kpiTableBody.addEventListener('input', e => {
-        if (e.target.classList.contains('scoreEvaluation')) calcTotalEvaluationScore();
-    });
-    // Bảng 2
-    document.querySelectorAll('#kpiTable2 .kpi2-evaluation').forEach(input => {
-        input.addEventListener('input', calcTotalEvaluationScore);
-    });
-    // Bảng 3
-    document.querySelectorAll('#kpiTable3 .kpi3-evaluation').forEach(input => {
-        input.addEventListener('input', calcTotalEvaluationScore);
-    });
-}
-
-// ... Khi load trang và reset/hiện form nhớ gọi addEvaluationInputEvents() và calcTotalEvaluationScore() ...
-document.addEventListener('DOMContentLoaded', ()=>{
-    initEditors();
-    addEvaluationInputEvents();
-    calcTotalEvaluationScore();
-    openModal();
-    document.getElementById('creationDate').valueAsDate = new Date();
-});
-// ========== XUẤT FILE HTML TĨNH KHÔNG CHO CHỈNH SỬA ==========
-document.getElementById('exportHtmlBtn').onclick = function() {
-    // Lấy thông tin để đặt tên file
-    const creatorName = document.getElementById('creatorName').value.trim().replace(/[^a-zA-Z0-9]/g,'');
-    const department = document.getElementById('department').value.trim().replace(/[^a-zA-Z0-9]/g,'');
+// ========== XUẤT HTML ==========
+exportHtmlBtn.onclick = function() {
+    const creatorName = document.getElementById('creatorName').value.trim();
+    const department = document.getElementById('department').value.trim();
     const creationDate = document.getElementById('creationDate').value;
+    
     if (!creatorName || !department || !creationDate) {
-        alert('Vui lòng nhập đủ Tên người lập, Bộ phận, Ngày lập trước khi xuất HTML!');
+        alert('Vui lòng nhập đủ thông tin trước khi xuất HTML!');
         return;
     }
-    // Lấy toàn bộ dữ liệu từ form hiện tại
-    const kpiRows = Array.from(document.querySelectorAll('#kpiTableBody tr')).map(row => ({
-        kpiIndicator: row.querySelector('.kpiIndicator').value,
-        achievedIndicator: row.querySelector('.achievedIndicator').value,
-        kpiScore: row.querySelector('.kpiScore').value,
-        scoreEvaluation: row.querySelector('.scoreEvaluation').value,
-        reportNotes: row.querySelector('.reportNotes').value,
-    }));
-    // Lấy dữ liệu bảng 2, 3 tĩnh
-    const kpi2 = Array.from(document.querySelectorAll('#kpiTable2 tbody tr')).map(row => ({
-        cells: Array.from(row.children).map(cell => {
-            if(cell.querySelector('input')) return cell.querySelector('input').value;
-            if(cell.querySelector('textarea')) return cell.querySelector('textarea').value;
-            return cell.innerHTML;
-        })
-    }));
-    const kpi3 = Array.from(document.querySelectorAll('#kpiTable3 tbody tr')).map(row => ({
-        cells: Array.from(row.children).map(cell => {
-            if(cell.querySelector('input')) return cell.querySelector('input').value;
-            if(cell.querySelector('textarea')) return cell.querySelector('textarea').value;
-            return cell.innerHTML;
-        })
-    }));
-    // Ghi chú cuối kỳ
-    const kpi2Note = document.querySelector('#kpi2NoteEditor .ql-editor').innerHTML;
-    const kpi3Note = document.querySelector('#kpi3NoteEditor .ql-editor').innerHTML;
-    // Tổng điểm
-    const totalScore = document.getElementById('total-evaluation-score').textContent;
-
-    // HTML mới: KHÔNG chứa input, textarea, button, modal
-    const style = `<style>
-        body { font-family: 'Inter',sans-serif; background: #f3f4f6; }
-        .container { background: #fff; border-radius: 14px; box-shadow: 0 2px 8px #ccc5; margin: 40px auto; max-width: 1100px; padding: 24px; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 18px; }
-        th, td { border: 1px solid #e5e7eb; padding: 12px; vertical-align: top; }
-        th { background: #4f46e5; color: #fff; }
-        h1, h2 { margin-top: 0; }
-        .framed-info { border: 2px solid #6366f1; border-radius: 14px; background: #f5f3ff; box-shadow: 0 1px 8px #d1d5db33; padding: 16px; }
-        .static-value { display: block; min-height: 28px; background: #f1f5f9; padding: 6px 10px; border-radius: 5px; }
-        .quill-view { background: #fff; border: 1px solid #ccc; border-radius: 8px; padding: 10px 18px; min-height: 50px; }
-    </style>`;
-    const kpiRowsHtml = kpiRows.map(r=>`
-        <tr>
-            <td><span class="static-value">${r.kpiIndicator}</span></td>
-            <td><span class="static-value">${r.achievedIndicator}</span></td>
-            <td><span class="static-value">${r.kpiScore}</span></td>
-            <td><span class="static-value">${r.scoreEvaluation}</span></td>
-            <td><span class="static-value">${r.reportNotes}</span></td>
-            <td></td>
-        </tr>
-    `).join('');
-    const genTableHtml = arr=>arr.map(r=>`<tr>${r.cells.map(c=>`<td><span class="static-value">${c}</span></td>`).join('')}</tr>`).join('');
-    // Giao diện mới
+    
+    const scores = calculateAllScores();
+    
+    // Tạo HTML tĩnh
     const html = `
-    <!DOCTYPE html>
-    <html lang="vi"><head>
-        <meta charset="utf-8">
-        <title>KPI Report - ${creatorName} ${department} ${creationDate}</title>
-        ${style}
-    </head><body>
-    <div class="container">
-        <h1 class="text-3xl font-bold text-center mb-8" style="color:#4f46e5">BẢNG KPI PHỤ TRÁCH ĐIỀU PHỐI KHO DƯỢC  </h1>
-        <div class="framed-info mb-8" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
-            <div>
-                <label><b>Tên người lập:</b></label>
-                <span class="static-value">${document.getElementById('creatorName').value}</span>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BÁO CÁO KPI - ${creatorName} - ${creationDate}</title>
+    <style>
+        body { font-family: 'Inter', sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+        .report-container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 3px solid #4f46e5; }
+        .header h1 { color: #4f46e5; margin: 0; }
+        .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; padding: 20px; background: #f0f9ff; border-radius: 10px; }
+        .info-item label { font-weight: bold; display: block; color: #555; margin-bottom: 5px; }
+        .info-item span { font-size: 1.1em; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        th { background: #4f46e5; color: white; padding: 12px; text-align: left; }
+        td { padding: 10px; border: 1px solid #ddd; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .score-display { font-weight: bold; color: #dc2626; }
+        .total-score { background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%); color: white; padding: 25px; border-radius: 12px; text-align: center; margin: 30px 0; }
+        .total-score .label { font-size: 1.2em; opacity: 0.9; }
+        .total-score .value { font-size: 3em; font-weight: bold; margin: 10px 0; }
+        .section-title { color: #4f46e5; border-left: 5px solid #4f46e5; padding-left: 15px; margin: 25px 0 15px 0; }
+        .regulation-box { background: #f0fff0; border: 2px dashed #22c55e; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .footer { text-align: center; margin-top: 40px; color: #888; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <div class="header">
+            <h1>BÁO CÁO KPI PHỤ TRÁCH KHO</h1>
+            <p>IDECO - Báo cáo cuối kỳ</p>
+        </div>
+        
+        <div class="info-grid">
+            <div class="info-item">
+                <label>Người lập:</label>
+                <span>${creatorName}</span>
             </div>
-            <div>
-                <label><b>Bộ phận:</b></label>
-                <span class="static-value">${document.getElementById('department').value}</span>
+            <div class="info-item">
+                <label>Bộ phận:</label>
+                <span>${department}</span>
             </div>
-            <div>
-                <label><b>Ngày lập:</b></label>
-                <span class="static-value">${document.getElementById('creationDate').value}</span>
+            <div class="info-item">
+                <label>Ngày lập:</label>
+                <span>${creationDate}</span>
             </div>
         </div>
-        <h2 style="color:#1e293b">KPI HOÀN THÀNH NHIỆM VỤ THEO ĐỊNH HƯỚNG THÁNG-TUẦN</h2>
-        <div style="overflow-x:auto">
+        
+        <h2 class="section-title">KPI NGHIỆP VỤ CHUYÊN MÔN</h2>
         <table>
             <thead>
                 <tr>
-                    <th>Chỉ số KPI</th><th>Đạt chỉ số</th><th>Điểm KPI %</th><th>Đánh giá điểm</th><th>Báo cáo</th><th></th>
+                    <th>STT</th>
+                    <th>Chỉ số KPI</th>
+                    <th>Đạt chỉ số</th>
+                    <th>Điểm KPI %</th>
+                    <th>Đánh giá điểm</th>
+                    <th>Báo cáo</th>
                 </tr>
             </thead>
-            <tbody>${kpiRowsHtml}</tbody>
+            <tbody>
+                ${Array.from(kpiTable1Body.querySelectorAll('tr')).map((row, index) => `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${row.querySelector('.kpiIndicator').value || ''}</td>
+                    <td>${row.querySelector('.achievedIndicator').value || ''}</td>
+                    <td class="score-display">${row.querySelector('.kpiScore').value || '0'}%</td>
+                    <td class="score-display">${row.querySelector('.scoreEvaluation').value || '0'}</td>
+                    <td>${row.querySelector('.reportNotes').value || ''}</td>
+                </tr>
+                `).join('')}
+            </tbody>
         </table>
-        </div>
-        <h2 style="color:#4f46e5">KPI DOANH THU</h2>
-        <table>${document.querySelector('#kpiTable2 thead').outerHTML}<tbody>${genTableHtml(kpi2)}</tbody></table>
-        <div><b>Phân tích báo cáo cuối kỳ:</b><div class="quill-view">${kpi2Note}</div></div>
-
-        <h2 style="color:#15803d">KPI PHÁT TRIỂN KHÁCH HÀNG MỚI THÀNH CÔNG</h2>
-        <table>${document.querySelector('#kpiTable3 thead').outerHTML}<tbody>${genTableHtml(kpi3)}</tbody></table>
-        <div><b>Phân tích báo cáo cuối kỳ:</b><div class="quill-view">${kpi3Note}</div></div>
-
-        <div class="mt-8 mb-2" style="text-align:right">
-            <span style="font-weight:600">TỔNG ĐIỂM KPI: </span>
-            <span style="font-weight:bold;color:#4f46e5;font-size:2rem">${totalScore}</span>
-        </div>
-        <hr style="margin:24px 0;">
-        <div style="background:#f0fff0;border:1.5px dashed #22c55e;padding:14px 20px;border-radius:15px;">
-            <div class="font-semibold mb-2 text-green-700">QUY ĐỊNH THƯỞNG KPI - TÍNH THƯỞNG HOA HỒNG </div>
-            <div class="text-gray-700 leading-relaxed" style="font-size:1rem">
-                ${document.querySelector('.border-green-500.bg-green-50').innerHTML}
+        
+        <h2 class="section-title">KPI HIỆU SUẤT CÔNG VIỆC</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Chỉ số KPI</th>
+                    <th>Đạt chỉ số</th>
+                    <th>Điểm KPI %</th>
+                    <th>Đánh giá điểm</th>
+                    <th>Báo cáo</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${Array.from(document.querySelectorAll('#kpiTable2 tbody tr')).map((row, index) => `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${row.cells[1].innerHTML.replace(/<[^>]+>/g, '')}</td>
+                    <td>${row.cells[2].innerHTML.replace(/<[^>]+>/g, '')}</td>
+                    <td class="score-display">${row.cells[3].innerHTML.replace(/<[^>]+>/g, '')}</td>
+                    <td class="score-display">${row.querySelector('.kpi2-evaluation').value || '0'}</td>
+                    <td>${row.querySelector('.kpi2-report').value || ''}</td>
+                </tr>
+                `).join('')}
+            </tbody>
+        </table>
+        
+        <div>
+            <h3>Phân tích báo cáo:</h3>
+            <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #ddd;">
+                ${kpi2NoteEditor.root.innerHTML || 'Không có phân tích'}
             </div>
         </div>
-        <div style="margin-top:24px;color:#999;font-size:14px;text-align:right">Xuất file lúc: ${new Date().toLocaleString()}</div>
+        
+        <h2 class="section-title">KPI CHÍNH XÁC - CHẤT LƯỢNG</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Chỉ số KPI</th>
+                    <th>Đạt chỉ số</th>
+                    <th>Điểm KPI %</th>
+                    <th>Đánh giá điểm</th>
+                    <th>Báo cáo</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${Array.from(document.querySelectorAll('#kpiTable3 tbody tr')).map((row, index) => `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${row.cells[1].innerHTML.replace(/<[^>]+>/g, '')}</td>
+                    <td>${row.cells[2].innerHTML.replace(/<[^>]+>/g, '')}</td>
+                    <td class="score-display">${row.cells[3].innerHTML.replace(/<[^>]+>/g, '')}</td>
+                    <td class="score-display">${row.querySelector('.kpi3-evaluation').value || '0'}</td>
+                    <td>${row.querySelector('.kpi3-report').value || ''}</td>
+                </tr>
+                `).join('')}
+            </tbody>
+        </table>
+        
+        <div>
+            <h3>Phân tích báo cáo:</h3>
+            <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #ddd;">
+                ${kpi3NoteEditor.root.innerHTML || 'Không có phân tích'}
+            </div>
+        </div>
+        
+        <div class="total-score">
+            <div class="label">TỔNG ĐIỂM KPI</div>
+            <div class="value">${scores.total}</div>
+            <div>Bảng 1: ${scores.table1.evaluation} điểm • Bảng 2: ${scores.table2.evaluation} điểm • Bảng 3: ${scores.table3.evaluation} điểm</div>
+        </div>
+        
+        <div class="regulation-box">
+            <h3>QUY ĐỊNH THƯỞNG KPI</h3>
+            <div>${document.querySelector('.border-green-500.bg-green-50').innerHTML}</div>
+        </div>
+        
+        <div class="footer">
+            <p>Báo cáo được xuất lúc: ${new Date().toLocaleString('vi-VN')}</p>
+            <p>IDECO KPI Management System</p>
+        </div>
     </div>
-    </body></html>
-    `;
-
+</body>
+</html>`;
+    
     // Tạo và tải file
     const blob = new Blob([html], { type: 'text/html' });
     const a = document.createElement('a');
-    const fileName = `${creatorName}-${department}-${creationDate}.html`;
+    const fileName = `KPI_Report_${creatorName}_${creationDate}.html`;
     a.href = URL.createObjectURL(blob);
     a.download = fileName;
-    a.style.display = 'none';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(a.href);
 };
 
+// ========== GÁN SỰ KIỆN ==========
+addRowBtn.onclick = () => addKpiRow();
+saveKpiBtn.onclick = () => saveKpiData();
+backToListBtn.onclick = () => { hideForm(); openModal(); };
+addNewKpiFromModalBtn.onclick = () => { resetMainForm(); showForm(); closeModal(); };
+closeModalBtn.onclick = closeModal;
+
+// Thêm sự kiện tính điểm cho các input
+document.addEventListener('DOMContentLoaded', () => {
+    initEditors();
+    calculateAllScores();
+    openModal();
+    document.getElementById('creationDate').valueAsDate = new Date();
+    
+    // Thêm sự kiện tính điểm tự động
+    document.querySelectorAll('#kpiTable2 .kpi2-evaluation').forEach(input => {
+        input.addEventListener('input', calculateAllScores);
+    });
+    
+    document.querySelectorAll('#kpiTable3 .kpi3-evaluation').forEach(input => {
+        input.addEventListener('input', calculateAllScores);
+    });
+});
+
+// Xử lý click ra ngoài modal
+window.onclick = function(event) {
+    if (event.target == kpiListModal) {
+        closeModal();
+    }
+};
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
