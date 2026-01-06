@@ -127,7 +127,7 @@
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td>Tỉ lệ hoàn thành đóng hàng phát sinh trong ngày đúng yêu cầu</td>
+                            <td>Soạn hàng và đóng thành đóng hàng phát sinh trong ngày đúng yêu cầu nếu đã có hảng đủ trong kho</td>
                             <td>Hoàn thành đóng hàng thành công trên 98% đơn hàng phát sinh trong kỳ (có báo cáo)</td>
                             <td class="kpi2-score kpi-score-display">15%</td>
                             <td><input class="kpi2-evaluation score-input border rounded-md p-2" type="number" min="0" max="100" value="0"></td>
@@ -136,7 +136,7 @@
                         <tr>
                             <td>3</td>
                             <td><b style="color: red;">Điều phối đơn hàng cùng giao nhận hoàn thành giao đúng trong kỳ</b></td>
-                            <td>Hoàn thành giao đúng - đủ các đơn hàng trong kỳ trên 98%/số đơn hàng phát sinh</td>
+                            <td>Hoàn thành phối hợp giao nhận giao hàng đúng tiến độ- không có phàn nàn giao trễ từ khách hàng dướt 2 lần</td>
                             <td class="kpi2-score kpi-score-display">10%</td>
                             <td><input class="kpi2-evaluation score-input border rounded-md p-2" type="number" min="0" max="100" value="0"></td>
                             <td><textarea class="kpi2-report w-full border rounded-md p-2" rows="2">Tự đánh giá</textarea></td>
@@ -178,7 +178,7 @@
                         <tr>
                             <td>1</td>
                             <td>Sai lô - hạn dùng - nhầm hàng - nhầm địa chỉ -sai thời điểm giao hàng</td>
-                            <td>Tỉ lệ sai sót 0% (không lỗi)</td>
+                            <td>Tỉ lệ sai sót 0% (không lỗi) khi đóng hàng theo từng phiếu xuất hàng -khớp với đơn hàng</td>
                             <td class="kpi3-score kpi-score-display">15%</td>
                             <td><input class="kpi3-evaluation score-input border rounded-md p-2" type="number" min="0" max="100" value="0"></td>
                             <td><textarea class="kpi3-report w-full border rounded-md p-2" rows="2">Tự đánh giá</textarea></td>
@@ -969,6 +969,7 @@ window.onclick = function(event) {
 </script>
 </body>
 </html>
+
 
 
 
