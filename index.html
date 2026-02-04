@@ -74,7 +74,7 @@
         </div>
 
         <!-- BẢNG 1: KPI NGHIỆP VỤ CHUYÊN MÔN (ĐỘNG) -->
-        <h2 class="text-2xl font-semibold mb-4 text-gray-800">KPI NGHIỆP VỤ CHUYÊN MÔN HOÀN THÀNH TRONG THÁNG (10%)</h2>
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800">KPI CÁC YÊU CẦU PHÁT SINH CÔNG VIỆC ĐƯỢC GIAO TRONG KỲ </h2>
         <div class="table-container mb-8 rounded-lg border border-gray-200">
             <table id="kpiTable1" class="min-w-full">
                 <thead>
@@ -178,7 +178,7 @@
                         <tr>
                             <td>1</td>
                             <td>Sai lô - hạn dùng - nhầm hàng - nhầm địa chỉ -sai thời điểm giao hàng</td>
-                            <td>Tỉ lệ sai sót 0% (không lỗi) khi đóng hàng theo từng phiếu xuất hàng -khớp với đơn hàng</td>
+                            <td>Tỉ lệ sai sót 0% (không lỗi) khi đóng hàng theo từng phiếu xuất hàng -khớp với đơn hàng- báo cáo trước kỳ lương</td>
                             <td class="kpi3-score kpi-score-display">15%</td>
                             <td><input class="kpi3-evaluation score-input border rounded-md p-2" type="number" min="0" max="100" value="0"></td>
                             <td><textarea class="kpi3-report w-full border rounded-md p-2" rows="2">Tự đánh giá</textarea></td>
@@ -186,16 +186,16 @@
                         <tr>
                             <td>2</td>
                             <td>Hồ sơ xuất - nhập tồn khai - khai báo ứng dụng</td>
-                            <td>Đẩy đủ > 95% có báo cáo khai báo chi tiết in - file cuối kỳ tháng đình kèm - báo cáo</td>
-                            <td class="kpi3-score kpi-score-display">10%</td>
+                            <td>Đẩy đủ 100 % có báo cáo khai báo chi tiết in - file cuối kỳ tháng đình kèm - báo cáo</td>
+                            <td class="kpi3-score kpi-score-display">15%</td>
                             <td><input class="kpi3-evaluation score-input border rounded-md p-2" type="number" min="0" max="100" value="0"></td>
                             <td><textarea class="kpi3-report w-full border rounded-md p-2" rows="2">Tự đánh giá</textarea></td>
                         </tr>
                         <tr>
                             <td>3</td>
                             <td>Công tác hỗ trợ quản lý khách hàng giao hoàn thành trong kỳ với kinh doanh</td>
-                            <td>Hoàn thành nghiệp thu giao đúng - đủng với khách hàng </td>
-                            <td class="kpi3-score kpi-score-display">10%</td>
+                            <td>Hoàn thành nghiệp thu giao đúng cho khách hàng - không phàn nàn </td>
+                            <td class="kpi3-score kpi-score-display">15%</td>
                             <td><input class="kpi3-evaluation score-input border rounded-md p-2" type="number" min="0" max="100" value="0"></td>
                             <td><textarea class="kpi3-report w-full border rounded-md p-2" rows="2">Tự đánh giá</textarea></td>
                         </tr>
@@ -217,7 +217,67 @@
                 <div id="kpi3NoteEditor" class="quill-editor"></div>
             </div>
         </div>
-
+<!-- THÊM VÀO SAU BẢNG KPI 3 - Trước phần "BẢNG 4" -->
+<div class="bg-gray-50 p-6 mt-6 rounded-lg border border-gray-300 shadow-sm">
+    <h3 class="text-lg font-bold mb-4 text-gray-800">THÔNG TIN ĐÁNH GIÁ</h3>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Người được đánh giá -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+                Tên người được đánh giá (Kế toán trưởng):
+            </label>
+            <input type="text" 
+                   id="evaluatedPerson" 
+                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                   placeholder="Nhập tên người được đánh giá">
+        </div>
+        
+        <!-- Người quản lý đánh giá -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+                Tên người quản lý đánh giá:
+            </label>
+            <input type="text" 
+                   id="evaluatingManager" 
+                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                   placeholder="Nhập tên quản lý đánh giá">
+        </div>
+        
+        <!-- Ngày đánh giá -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+                Ngày đánh giá:
+            </label>
+            <input type="date" 
+                   id="evaluationDate" 
+                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+        </div>
+        
+        <!-- Chức vụ người đánh giá -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+                Chức vụ người đánh giá:
+            </label>
+            <input type="text" 
+                   id="evaluatorPosition" 
+                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                   placeholder="VD: Trưởng phòng, Giám đốc...">
+        </div>
+    </div>
+    
+    <!-- Ghi chú đánh giá -->
+    <div class="mt-6">
+        <label class="block text-sm font-medium text-gray-700 mb-2">
+            Ghi chú đánh giá của quản lý:
+        </label>
+        <textarea 
+            id="managerEvaluationNote" 
+            rows="3" 
+            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+            placeholder="Nhập ghi chú, đánh giá từ quản lý..."></textarea>
+    </div>
+</div>
         <!-- QUY ĐỊNH THƯỞNG KPI -->
         <div class="mt-4 p-6 border border-dashed border-green-500 bg-green-50 rounded-xl shadow-sm mb-8">
             <div class="font-semibold mb-4 text-green-700 text-lg">QUY ĐỊNH THƯỞNG KPI</div>
@@ -476,87 +536,23 @@ function calculateAllScores() {
 }
 
 // ========== LƯU DỮ LIỆU KPI ==========
-function saveKpiData() {
-    const creatorName = document.getElementById('creatorName').value.trim();
-    const department = document.getElementById('department').value.trim();
-    const creationDate = document.getElementById('creationDate').value;
-    
-    if (!creatorName || !department || !creationDate) {
-        alert('Vui lòng nhập đầy đủ Tên người lập, Bộ phận và Ngày lập.');
-        return false;
-    }
-    
-    // Thu thập dữ liệu bảng 1
-    const kpiRowsData = [];
-    const rows = kpiTable1Body.querySelectorAll('tr');
-    rows.forEach(row => {
-        const kpiIndicator = row.querySelector('.kpiIndicator');
-        if (kpiIndicator && kpiIndicator.value.trim()) {
-            kpiRowsData.push({
-                kpiIndicator: kpiIndicator.value.trim(),
-                achievedIndicator: row.querySelector('.achievedIndicator').value.trim(),
-                kpiScore: row.querySelector('.kpiScore').value,
-                scoreEvaluation: row.querySelector('.scoreEvaluation').value,
-                reportNotes: row.querySelector('.reportNotes').value.trim(),
-            });
-        }
-    });
-    
-    // Thu thập dữ liệu bảng 2
-    const kpi2Data = [];
-    document.querySelectorAll('#kpiTable2 tbody tr').forEach((row, index) => {
-        kpi2Data.push({
-            evaluation: row.querySelector('.kpi2-evaluation').value,
-            report: row.querySelector('.kpi2-report').value
-        });
-    });
-    
-    // Thu thập dữ liệu bảng 3
-    const kpi3Data = [];
-    document.querySelectorAll('#kpiTable3 tbody tr').forEach((row, index) => {
-        kpi3Data.push({
-            evaluation: row.querySelector('.kpi3-evaluation').value,
-            report: row.querySelector('.kpi3-report').value
-        });
-    });
-    
-    // Lấy nội dung editor
-    const kpi2Note = kpi2NoteEditor.root.innerHTML;
-    const kpi3Note = kpi3NoteEditor.root.innerHTML;
-    
-    // Tính tổng điểm
-    const scores = calculateAllScores();
-    
-    // Tạo đối tượng dữ liệu
-    const kpiData = {
-        creatorName,
-        department,
-        creationDate,
-        kpiRows: kpiRowsData,
-        kpi2Data,
-        kpi3Data,
-        kpi2Note,
-        kpi3Note,
-        scores,
-        year: new Date().getFullYear(),
-        month: new Date().getMonth() + 1,
-        id: currentKpiId || generateId(),
-        lastModified: new Date().toISOString()
-    };
-    
-    // Lưu lên Firebase
-    db.ref('kpiBoards_kho/' + kpiData.id).set(kpiData, err => {
-        if (err) {
-            alert('Lỗi khi lưu lên server: ' + err.message);
-        } else {
-            alert('Đã lưu bảng KPI thành công!');
-            currentKpiId = kpiData.id;
-            displaySavedKpis();
-        }
-    });
-    
-    return true;
-}
+// Thêm vào phần thu thập dữ liệu trước khi tạo kpiData
+const evaluatedPerson = document.getElementById('evaluatedPerson').value.trim();
+const evaluatingManager = document.getElementById('evaluatingManager').value.trim();
+const evaluationDate = document.getElementById('evaluationDate').value;
+const evaluatorPosition = document.getElementById('evaluatorPosition').value.trim();
+const managerEvaluationNote = document.getElementById('managerEvaluationNote').value.trim();
+
+// Thêm vào object kpiData (trong hàm saveKpiData):
+let kpiData = {
+    // ... các thuộc tính cũ
+    evaluatedPerson,
+    evaluatingManager,
+    evaluationDate,
+    evaluatorPosition,
+    managerEvaluationNote,
+    // ... tiếp tục các thuộc tính cũ
+};
 
 // ========== HIỂN THỊ DANH SÁCH KPI ĐÃ LƯU ==========
 function displaySavedKpis() {
@@ -656,7 +652,12 @@ function loadKpiToForm(kpiId) {
                     if (kpi.kpi3Data[index]) textarea.value = kpi.kpi3Data[index].report;
                 });
             }
-            
+            // Thêm vào phần điền dữ liệu trong hàm loadKpiToForm
+if (kpi.evaluatedPerson !== undefined) document.getElementById('evaluatedPerson').value = kpi.evaluatedPerson;
+if (kpi.evaluatingManager !== undefined) document.getElementById('evaluatingManager').value = kpi.evaluatingManager;
+if (kpi.evaluationDate !== undefined) document.getElementById('evaluationDate').value = kpi.evaluationDate;
+if (kpi.evaluatorPosition !== undefined) document.getElementById('evaluatorPosition').value = kpi.evaluatorPosition;
+if (kpi.managerEvaluationNote !== undefined) document.getElementById('managerEvaluationNote').value = kpi.managerEvaluationNote;
             // Tải nội dung editor
             kpi2NoteEditor.root.innerHTML = kpi.kpi2Note || '';
             kpi3NoteEditor.root.innerHTML = kpi.kpi3Note || '';
@@ -687,7 +688,13 @@ function resetMainForm() {
     document.getElementById('creatorName').value = '';
     document.getElementById('department').value = '';
     document.getElementById('creationDate').valueAsDate = new Date();
-    
+    // Thêm vào phần reset
+document.getElementById('evaluatedPerson').value = '';
+document.getElementById('evaluatingManager').value = '';
+document.getElementById('evaluatorPosition').value = '';
+document.getElementById('managerEvaluationNote').value = '';
+// Ngày đánh giá mặc định là ngày hiện tại
+document.getElementById('evaluationDate').valueAsDate = new Date();
     kpiTable1Body.innerHTML = '';
     rowCounter = 0;
     addKpiRow();
@@ -747,7 +754,16 @@ exportHtmlBtn.onclick = function() {
     const creatorName = document.getElementById('creatorName').value.trim();
     const department = document.getElementById('department').value.trim();
     const creationDate = document.getElementById('creationDate').value;
-    
+    // Trong phần tạo htmlContent, thêm đoạn này sau phần header-info
+const evaluationInfo = `
+<div class="evaluation-info" style="background: #f8fafc; padding: 20px; border-radius: 10px; margin: 20px 0;">
+    <h3>THÔNG TIN ĐÁNH GIÁ</h3>
+    <p><strong>Người được đánh giá:</strong> ${evaluatedPerson || 'Chưa nhập'}</p>
+    <p><strong>Người đánh giá:</strong> ${evaluatingManager || 'Chưa nhập'} (${evaluatorPosition || ''})</p>
+    <p><strong>Ngày đánh giá:</strong> ${evaluationDate || 'Chưa nhập'}</p>
+    ${managerEvaluationNote ? `<p><strong>Ghi chú đánh giá:</strong><br>${managerEvaluationNote}</p>` : ''}
+</div>
+`;
     if (!creatorName || !department || !creationDate) {
         alert('Vui lòng nhập đủ thông tin trước khi xuất HTML!');
         return;
@@ -962,6 +978,7 @@ window.onclick = function(event) {
 </script>
 </body>
 </html>
+
 
 
 
